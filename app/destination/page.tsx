@@ -1,4 +1,4 @@
-import Destinations from "../components/Destination";
+import Destinations from "../components/EndlessWonder";
 
 export default function DestinationPage() {
   return (

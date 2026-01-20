@@ -1,104 +1,147 @@
-'use client';
-import { motion, Variants } from "framer-motion";
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+
+/* ---------------- SLIDES DATA ---------------- */
+
+const slides = [
+  {
+    title: "Discover Timeless Egyptian Adventures",
+    text: "Explore deserts, oases, and ancient wonders with expert local guides.",
+  },
+  {
+    title: "Journey Through The Sahara",
+    text: "Experience the White Desert, Black Desert, and the magic of Siwa Oasis.",
+  },
+  {
+    title: "Travel With Siri Sand TOur",
+    text: "Authentic experiences led by people who truly live the land.",
+  },
+];
+
+/* ---------------- HERO ---------------- */
 
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
 
-  // ===== VARIANTS =====
-  const leftStagger: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
-      },
-    },
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 7000);
 
-  const stepUp: Variants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.35,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
-  const bgFade: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      <div className="relative h-full w-full grid sm:grid-cols-[43%_57%] md:grid-cols-[40%_60%] lg:grid-cols-[30%_70%]">
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* 🎥 VIDEO BACKGROUND */}
+      <video
+        suppressHydrationWarning
+        className="absolute inset-0 h-[700px] w-full object-cover scale-105"
+        src="/hero-video.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
 
-        {/* ================= LEFT SIDE (DESKTOP) ================= */}
-        <motion.div
-          variants={leftStagger}
-          initial="hidden"
-          animate="visible"
-          className="relative z-30 flex flex-col px-6 sm:px-12 pt-20 sm:pt-40 bg-white hidden sm:flex"
-        >
-          <motion.div variants={bgFade} className="absolute inset-0 bg-white z-[-1]" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
 
-          <motion.p variants={stepUp} className="text-[14px] sm:text-[16px] tracking-[0.55em] text-[#0A7BBE] mb-4 sm:mb-6">
-            WELCOME TO
-          </motion.p>
-
-          <motion.h1 variants={stepUp} className="text-[48px] sm:text-[72px] leading-[1.05] font-bold tracking-[-0.02em] text-[#1F4E79]">
-            SIRISAND <br /> TOUR
-          </motion.h1>
-
-          <motion.p variants={stepUp} className="mt-6 lg:mt-5 sm:mt-14 text-[#0A7BBE] leading-snug break-normal text-base sm:text-lg md:text-xl lg:text-2xl max-w-full sm:max-w-[500px] md:max-w-[650px] lg:max-w-[700px]">
-            Where Luxury Meets Tranquility and Every Moment Becomes a Cherished Memory
-          </motion.p>
-        </motion.div>
-
-        {/* ================= RIGHT SIDE / VIDEO ================= */}
-        <div className="relative h-full w-full">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster="/hero-poster.png"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-
-          <div className="absolute inset-y-0 left-0 w-[35%] bg-gradient-to-r from-white/95 to-transparent z-20 hidden sm:block" />
-
-          {/* ================= MOBILE TEXT WITH SCROLL REVEAL ================= */}
-          <motion.div
-            variants={leftStagger}        // parent stagger
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            className="absolute mt-10 inset-0 flex flex-col justify-center items-center px-6 z-20 text-center sm:hidden"
-          >
-            <motion.p variants={stepUp} className="text-[14px] tracking-[0.55em] text-[#0A7BBE] mb-2">
-              WELCOME TO
-            </motion.p>
-
-            <motion.h1 variants={stepUp} className="text-[32px] sm:text-[40px] font-bold leading-snug text-[#1F4E79]">
-              SIRISAND <br /> TOUR
-            </motion.h1>
-
-            <motion.p variants={stepUp} className="mt-4 text-[#0A7BBE] text-sm sm:text-base md:text-lg leading-snug break-normal max-w-full md:max-w-[300px] text-center">
-              Where Luxury Meets Tranquility and Every Moment Becomes a Cherished Memory
-            </motion.p>
-          </motion.div>
-
-        </div>
+      {/* TEXT LAYER */}
+      <div className="relative z-10 flex h-full items-center justify-start px-6 lg:px-20">
+        <AnimatePresence mode="wait">
+          <TextBlock key={current} slide={slides[current]} />
+        </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+/* ---------------- TEXT BLOCK ---------------- */
+
+function TextBlock({ slide }: { slide: any }) {
+  return (
+    <motion.div
+      className="max-w-4xl text-left text-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* Heading */}
+      <motion.h1
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+        className="text-2xl sm:text-3xl md:text-6xl font-bold leading-tight"
+      >
+        {slide.title}
+      </motion.h1>
+
+      {/* Sub Text */}
+      <motion.p
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-white/90 max-w-2xl"
+      >
+        {slide.text}
+      </motion.p>
+
+      {/* BUTTONS */}
+      <div className="mt-6 sm:mt-8 flex flex-wrap gap-4 sm:gap-6">
+        {/* CTA 1 */}
+        <button
+          className="
+            relative overflow-hidden w-fit px-8 py-4 rounded-full
+            border border-[#0A7BBE]
+            text-white font-semibold
+            group
+          "
+        >
+          <span
+            className="
+              absolute inset-0 bg-[#0A7BBE]
+              translate-x-[-100%]
+              group-hover:translate-x-0
+              transition-transform duration-500 ease-out
+            "
+          />
+          <span className="relative z-10 flex items-center gap-3">
+            Explore Tours
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </span>
+        </button>
+
+        {/* CTA 2 */}
+        <button
+          className="
+            relative overflow-hidden w-fit px-8 py-4 rounded-full
+            border border-white
+            text-white font-semibold
+            group
+          "
+        >
+          <span
+            className="
+              absolute inset-0 bg-[#0A7BBE]
+              translate-x-[-100%]
+              group-hover:translate-x-0
+              transition-transform duration-500 ease-out
+            "
+          />
+          <span className="relative z-10 flex items-center gap-3">
+            Contact us
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </span>
+        </button>
+      </div>
+    </motion.div>
   );
 }

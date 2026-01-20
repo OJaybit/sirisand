@@ -1,251 +1,157 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 const navLinks = [
-  { name: 'HOME', href: '/' },
-  { name: 'ABOUT', href: '/AboutUs' },
-  {
-    name: 'TOURS',
-    href: '/tours',
-    dropdown: [
-      'Cairo',
-      'Luxor',
-      'Hurghada',
-      'Marsa Alam',
-      'Sharm El Sheikh',
-      'Aswan',
-      'Siwa',
-      'Fayoum',
-    ],
-  },
-  { name: 'DESTINATION', href: '/destination' },
-  { name: 'CONTACT', href: '/contact' },
+  { label: 'Home', href: '#home' },
+  { label: 'Trips', href: '#tours' },
+  { label: 'Blog', href: '#blog' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileToursOpen, setMobileToursOpen] = useState(false);
-  const [desktopToursOpen, setDesktopToursOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // ✅ moved inside component
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const desktopToursRef = useRef<HTMLDivElement>(null);
-
-  // Detect scroll to add border
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // run once on mount
-
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  // Close desktop dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        desktopToursRef.current &&
-        !desktopToursRef.current.contains(e.target as Node)
-      ) {
-        setDesktopToursOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileMenuOpen]);
 
   return (
     <>
-      {/* ================= NAVBAR ================= */}
-      {!mobileMenuOpen && (
-      <header
-  className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-    ${scrolled ? ' backdrop-blur-sm' : 'bg-transparent'}
-  `}
->
+      {/* DESKTOP NAV */}
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+          scrolled
+            ? 'bg-black/80 backdrop-blur-md shadow-lg'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 -mt-5 py-0">
+          
+         <Link href="/" className="flex items-center gap-3">
+  <Image
+    src="/logo.png"
+    alt="Siri Sand Tour Logo"
+    width={40}
+    height={40}
+    priority
+     sizes="(max-width: 768px) 50vw, 33vw" 
+    className="block h-30 w-30"
+  />
+  {/* <div className="leading-tight">
+    <p className="text-lg font-semibold text-white">
+      Siri Sand Tour
+    </p>
+    <p className="text-[11px] tracking-widest uppercase text-white/70">
+      Desert Adventures
+    </p>
+  </div> */}
+</Link>
 
-          <div className="mx-auto max-w-7xl px-6 h-20 flex items-center justify-between">
-            {/* LOGO */}
-            <Link href="/" className="relative z-50">
-              <div className="relative w-40 h-20">
-                <Image
-                  src="/logo.png"
-                  alt="Sirisand Logo"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
-              </div>
-            </Link>
 
-            {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map(link => {
-                if (!link.dropdown) {
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="text-sm font-bold tracking-widest text-gray-900 hover:text-[#0A7BBE]"
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                }
+          {/* LINKS */}
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <NavLink key={link.href} href={link.href}>
+                {link.label}
+              </NavLink>
+            ))}
 
-                return (
-                  <div key={link.name} ref={desktopToursRef} className="relative">
-                    <button
-                      onClick={() => setDesktopToursOpen(prev => !prev)}
-                      className="flex items-center gap-1 text-sm font-bold tracking-widest text text-gray-900 hover:text-[#0A7BBE]"
-                    >
-                      TOURS
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform ${
-                          desktopToursOpen ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-
-                    <AnimatePresence>
-                      {desktopToursOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 12 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full mt-4 w-56 bg-white rounded-xl shadow-xl overflow-hidden"
-                        >
-                          {link.dropdown.map(city => (
-                            <Link
-                              key={city}
-                              href={`/tours/${city.toLowerCase().replace(/ /g, '-')}`}
-                              onClick={() => setDesktopToursOpen(false)}
-                              className="block px-6 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-[#0A7BBE]"
-                            >
-                              {city}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* HAMBURGER */}
-            <button
-              onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1 z-50"
+            {/* CTA */}
+            <a
+              href="#tours"
+              className="rounded-full bg-[#0A7BBE]  px-6 py-2 text-sm font-semibold text-black transition hover:bg-[#0A7BBE] "
             >
-              <span className="w-6 h-0.5 bg-gray-900" />
-              <span className="w-6 h-0.5 bg-gray-900" />
-              <span className="w-6 h-0.5 bg-gray-900" />
-            </button>
+              Book Now
+            </a>
           </div>
-        </header>
-      )}
 
-      {/* ================= FULLSCREEN MOBILE MENU ================= */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ y: '-100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="
-  fixed inset-0 z-[9999]
-  bg-[#0A7BBE]
-  md:hidden
-  px-6 pt-28
-  h-screen
-  overflow-y-auto
-  overscroll-contain
-"
+          {/* MOBILE BUTTON */}
+          <button
+            className="text-2xl text-white md:hidden"
+            onClick={() => setMobileOpen(true)}
           >
-            {/* CLOSE BUTTON */}
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 text-white text-4xl font-light"
-            >
-              ×
-            </button>
+            <HiOutlineMenu />
+          </button>
+        </div>
+      </motion.nav>
 
-            <div className="divide-y divide-white/30">
-              {navLinks.map(link => {
-                if (!link.dropdown) {
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-6 text-2xl font-semibold text-white"
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                }
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg"
+          >
+            <div className="flex h-full flex-col items-center justify-center gap-8 text-[#0A7BBE] ">
+              
+              {/* CLOSE */}
+              <button
+                className="absolute right-6 top-6 text-3xl"
+                onClick={() => setMobileOpen(false)}
+              >
+                <HiOutlineX />
+              </button>
 
-                return (
-                  <div key={link.name} className="py-6">
-                    <button
-                      onClick={() => setMobileToursOpen(prev => !prev)}
-                      className="w-full flex items-center justify-between text-2xl font-semibold text-white"
-                    >
-                      TOURS
-                      <ChevronDown
-                        className={`w-6 h-6 transition-transform ${
-                          mobileToursOpen ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
+              {/* LINKS */}
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-2xl font-medium"
+                >
+                  {link.label}
+                </a>
+              ))}
 
-                    <AnimatePresence>
-                      {mobileToursOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden mt-4 pl-4 space-y-4"
-                        >
-                          {link.dropdown.map(city => (
-                            <Link
-                              key={city}
-                              href={`/tours/${city.toLowerCase().replace(/ /g, '-')}`}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block text-lg text-white/90"
-                            >
-                              {city}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
+              {/* CTA */}
+              <a
+                href="#tours"
+                className="mt-6 rounded-full bg-white px-8 py-3 text-sm font-semibold text-black"
+                onClick={() => setMobileOpen(false)}
+              >
+                Explore Tours
+              </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+/* ---------------- LINK COMPONENT ---------------- */
+
+function NavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      className="group relative text-sm font-medium text-gold"
+    >
+      {children}
+      <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 bg-white transition-all duration-300 group-hover:w-full" />
+    </a>
   );
 }

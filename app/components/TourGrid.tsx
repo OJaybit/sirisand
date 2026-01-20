@@ -1,227 +1,150 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ArrowRight } from 'lucide-react';
 
-/* ================= ANIMATION SYSTEM (THANK YOU STYLE) ================= */
-
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const stepUp: Variants = {
-  hidden: { opacity: 0, y: 22 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
-
-/* ================= DATA ================= */
-
-const tours = [
-  {
-    id: 'hurghada',
-    city: 'Hurghada',
-    tag: 'Red Sea Paradise',
-    image: '/images/tours/hurghada.webp',
-    rating: '4.9',
-    details: 'Tawila Island, Orange Bay, Submarine & Safari',
-    link: '#',
-  },
-  {
-    id: 'fayoum',
-    city: 'Fayoum',
-    tag: 'Desert Oasis',
-    image: '/images/tours/fayoum.webp',
-    rating: '4.8',
-    details: 'Tunis Village, Wadi El Rayan & Sandboarding',
-    link: '#',
-  },
-  {
-    id: 'marsa-alam',
-    city: 'Marsa Alam',
-    tag: 'Diving Haven',
-    image: '/images/tours/marsa-alam.webp',
-    rating: '5.0',
-    details: 'Royal Sea Scope, Satayah Dolphin House & Safari',
-    link: '#',
-  },
-  {
-    id: 'cairo',
-    city: 'Cairo',
-    tag: 'Ancient History',
-    image: '/images/tours/cairo.webp',
-    rating: '5.0',
-    details: 'Giza Pyramids, GEM Museum & Historic Mosques',
-    link: '#',
-  },
-  {
-    id: 'sharm',
-    city: 'Sharm El-Sheikh',
-    tag: 'Luxury Resort',
-    image: '/images/tours/sharm.webp',
-    rating: '4.9',
-    details: 'Ras Mohamed, Tiran Island & Pirate Boat',
-    link: '#',
-  },
-  {
-    id: 'luxor',
-    city: 'Luxor',
-    tag: 'Open Air Museum',
-    image: '/images/tours/luxor.webp',
-    rating: '5.0',
-    details: 'Valley of the Kings, Karnak & Hot Air Balloon',
-    link: '#',
-  },
-  {
-    id: 'siwa',
-    city: 'Siwa',
-    tag: 'Serene Escape',
-    image: '/images/tours/siwa.webp',
-    rating: '4.7',
-    details: 'Salt Lakes, Shali Fortress & Safari',
-    link: '#',
-  },
-  {
-    id: 'aswan',
-    city: 'Aswan',
-    tag: 'Nubian Beauty',
-    image: '/images/tours/aswan.webp',
-    rating: '4.8',
-    details: 'Philae Temple, High Dam & Felucca Ride',
-    link: '#',
-  },
+const destinations = [
+  { id: 1, title: 'Luxor', image: 'luxor.webp', slug: 'luxor' },
+  { id: 2, title: 'Aswan', image: 'aswan.webp', slug: 'aswan' },
+  { id: 3, title: 'Hurghada', image: 'hurghada.webp', slug: 'hurghada' },
+  { id: 4, title: 'White Desert', image: 'white-desert.webp', slug: 'white-desert' },
+  { id: 5, title: 'Black Desert', image: 'black-desert.webp', slug: 'black-desert' },
+  { id: 6, title: 'Siwa', image: 'siwa.webp', slug: 'siwa' },
+  { id: 7, title: 'Cairo', image: 'cairo.webp', slug: 'cairo' },
+  { id: 8, title: 'Marsa Alam', image: 'marsa-alam.webp', slug: 'marsa-alam' },
+  { id: 9, title: 'Sharm', image: 'sharm.webp', slug: 'sharm' },
+  { id: 10, title: 'Fayoum', image: 'fayoum.webp', slug: 'fayoum' },
 ];
 
-/* ================= COMPONENT ================= */
+export default function DestinationCarousel() {
+  const [index, setIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(260);
+  const [visibleCount, setVisibleCount] = useState(5);
 
-export default function TourGrid() {
+  /* RESPONSIVE SETTINGS */
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width < 640) {
+        setVisibleCount(1);
+        setCardWidth(width - 40);
+      } else if (width < 1024) {
+        setVisibleCount(3);
+        setCardWidth(260);
+      } else {
+        setVisibleCount(5);
+        setCardWidth(260);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const maxIndex = destinations.length - visibleCount;
+
+  /* AUTO SCROLL */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [maxIndex]);
+
   return (
     <section
-      id="tours"
-      className="relative overflow-hidden py-12 md:py-20 bg-white -mt-15"
+      className="relative bg-[#f8f4eb] py-10 overflow-hidden"
+      style={{
+        backgroundImage: "url('/background-image.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'overlay',
+        opacity: 0.95,
+      }}
     >
-      <div className="container mx-auto px-6 md:px-12">
+      {/* HEADER */}
+      <div className="text-center p-10">
+        <p className="text-2xl font-[cursive] text-[#0A7BBE]">
+          Top Destinations
+        </p>
+        <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">
+          Popular Destinations
+        </h2>
+      </div>
 
-        {/* ================= HEADER ================= */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
+      {/* CAROUSEL */}
+      <div className="mt-20 overflow-hidden">
+        <div
+          className="flex gap-6 transition-transform duration-700 ease-out px-5 sm:px-10"
+          style={{ transform: `translateX(-${index * cardWidth}px)` }}
         >
-          <motion.span
-            variants={stepUp}
-            className="text-[#0A7BBE] font-bold tracking-widest text-sm uppercase block mb-3"
-          >
-            Explore Our Tours
-          </motion.span>
+          {destinations.map((dest, i) => {
+            const centerIndex = index + Math.floor(visibleCount / 2);
+            const distanceFromCenter = Math.abs(i - centerIndex);
 
-          <motion.h2
-            variants={stepUp}
-            className="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-5"
-          >
-            Choose Your <br />
-            <span className="text-[#0A7BBE]">Perfect Adventure</span>
-          </motion.h2>
+            /* ARC DEPTH (ONLY FOR LG SCREENS) */
+            const isLargeScreen =
+              typeof window !== 'undefined' && window.innerWidth >= 1024;
 
-          <motion.p
-            variants={stepUp}
-            className="text-slate-600 text-base md:text-lg"
-          >
-            From the deep blue of the Red Sea to the golden sands of the desert.
-          </motion.p>
-        </motion.div>
+            const translateY = isLargeScreen
+              ? distanceFromCenter * 30
+              : 0;
 
-        {/* ================= GRID ================= */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.05 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {tours.map((tour) => (
-            <motion.div
-              key={tour.id}
-              variants={stepUp}
-              whileHover={{ y: -6 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              {/* IMAGE */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <Image
-                  src={tour.image}
-                  alt={tour.city}
-                  fill
-                  priority={tour.id === 'hurghada'}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+            const scale =
+              distanceFromCenter === 0 ? 1 : 0.92;
 
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-
-                {/* Rating */}
-                <div className="absolute top-3 right-3 bg-white px-2.5 py-1 rounded-full flex items-center gap-1 shadow">
-                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                  <span className="text-xs font-bold text-slate-900">
-                    {tour.rating}
-                  </span>
+            return (
+              <div
+                key={dest.id}
+                className="shrink-0 transition-all duration-500"
+                style={{
+                  width: cardWidth,
+                  transform: `translateY(${translateY}px) scale(${scale})`,
+                  opacity: distanceFromCenter === 0 ? 1 : 0.75,
+                  zIndex: 10 - distanceFromCenter,
+                }}
+              >
+                {/* IMAGE */}
+                <div className="relative rounded-[48px] p-[3px] bg-white/40 backdrop-blur overflow-hidden shadow-2xl group">
+                  <Image
+                    src={`/images/tours/${dest.image}`}
+                    alt={dest.title}
+                    width={cardWidth}
+                    height={240}
+                    className="object-cover rounded-[44px] transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
                 </div>
 
-                {/* Tag */}
-                <div className="absolute top-3 left-3 bg-[#0A7BBE] px-3 py-1 rounded-full">
-                  <span className="text-white text-xs font-semibold">
-                    {tour.tag}
-                  </span>
-                </div>
-              </div>
-
-              {/* CONTENT */}
-              <div className="p-5 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#0A7BBE] transition-colors">
-                  {tour.city}
-                </h3>
-
-                <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-grow">
-                  {tour.details}
-                </p>
-
-                {/* ACTIONS */}
-                <div className="flex gap-2 mt-auto">
-                  <Link
-                    href={tour.link}
-                    className="flex-1 bg-[#0A7BBE] hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-lg flex items-center justify-center transition"
-                  >
-                    Details
-                  </Link>
-
-                  <Link
-                    href={tour.link}
-                    className="flex-1 border-2 border-[#0A7BBE] text-[#0A7BBE] hover:bg-slate-50 text-sm font-semibold py-2.5 rounded-lg flex items-center justify-center gap-1 transition group/btn"
-                  >
-                    Book
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                {/* TEXT */}
+                <div className="mt-6 text-center">
+                  <Link href={`/destinations/${dest.slug}`}>
+                    <h3 className="text-xl font-bold text-[#0A7BBE] hover:text-[#d6b36b] transition">
+                      {dest.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">Explore</p>
                   </Link>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            );
+          })}
+        </div>
+      </div>
 
+      {/* DOTS */}
+      <div className="mt-12 flex justify-center gap-4">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`h-3 w-3 rounded-full transition ${
+              i === index ? 'bg-[#d6b36b]' : 'border border-[#2a4b4b]'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
