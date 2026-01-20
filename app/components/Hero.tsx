@@ -64,7 +64,7 @@ export default function Hero() {
 function TextBlock({ slide }: { slide: any }) {
   return (
     <motion.div
-      className="max-w-4xl text-left text-white"
+      className="max-w-4xl text-left text-white lg mt-15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -96,7 +96,7 @@ function TextBlock({ slide }: { slide: any }) {
         <button
           className="
             relative overflow-hidden w-fit px-8 py-4 rounded-full
-            border border-[#0A7BBE]
+            bg-[#d6b36b] border border-[#2a4b4b]
             text-white font-semibold
             group
           "

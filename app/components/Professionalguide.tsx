@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function TripSection() {
   return (
-    <section className="w-full px-6 lg:px-20 py-24">
+    <section className="w-full px-6 lg:px-20 py-10">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
 
         {/* ================= TEXT SIDE (MOBILE FIRST) */}
@@ -16,15 +16,15 @@ export default function TripSection() {
           transition={{ duration: 0.6 }}
           className="order-1 lg:order-2 flex flex-col gap-10 max-w-xl"
         >
-          <p className="font-[cursive] text-[#0A3D40] text-xl">
+          <p className="font-[cursive] text-[#0A7BEE] text-xl ">
             Let’s Go Together
           </p>
 
-          <h1 className="text-5xl font-bold text-[#0A3D40] leading-tight">
+          <h1 className="text-5xl font-bold text-[#0A7BEE] -mt-5 leading-tight">
             Plan Your <br /> Trip With us
           </h1>
 
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 leading-relaxed -mt-5">
             Explore the beauty of Egypt with unforgettable group tours to amazing
             destinations like Siwa Oasis, the White Desert, Luxor, Aswan and
             Fayoum. Let’s go together and create memories that will stay with you
@@ -42,7 +42,7 @@ export default function TripSection() {
                            transition-colors duration-300"
               />
               <div>
-                <h3 className="font-semibold text-lg text-[#0A3D40]">
+                <h3 className="font-semibold text-lg text-[#0A7BEE]">
                   Exclusive Trip
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -60,7 +60,7 @@ export default function TripSection() {
                            transition-colors duration-300"
               />
               <div>
-                <h3 className="font-semibold text-lg text-[#0A3D40]">
+                <h3 className="font-semibold text-lg text-[#0A7BEE]">
                   Professional Guide
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -108,7 +108,7 @@ export default function TripSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="order-2 lg:order-1 relative w-full h-[420px] lg:h-[520px]"
+          className="order-2 lg:order-1 relative lg:-mt-20 -mt-10 w-full h-[420px] lg:h-[520px]"
         >
           {/* Large Image with diagonal shape */}
           <div
@@ -132,19 +132,19 @@ export default function TripSection() {
          {/* SMALL FLOATING IMAGE (NOT CIRCLE) */}
 <div
   className="
-    absolute right-0 bottom-6
+    absolute right-0 bottom-20
     w-[38%] h-[34%]
     sm:w-[42%] sm:h-[38%]
     lg:w-[45%] lg:h-[40%]
     overflow-hidden
-    border-[10px] border-white
+    border-[5px] border-white
     shadow-2xl
   "
   style={{
-    borderTopLeftRadius: "60px",
-    borderTopRightRadius: "24px",
-    borderBottomLeftRadius: "24px",
-    borderBottomRightRadius: "60px",
+    borderTopLeftRadius: "200px",
+    borderTopRightRadius: "5px",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "200px",
   }}
 >
   <Image

@@ -6,6 +6,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useState } from 'react';
 
 export default function PopularDestinationsSlider() {
   const tours = [
@@ -21,6 +22,9 @@ export default function PopularDestinationsSlider() {
     { title: 'White Desert Camping Adventure', days: '4 Days', image: '/images/tours/10.jpeg', height: 'h-52' },
     { title: 'Grand Egypt Experience', days: '12 Days', image: '/images/tours/11.jpg', height: 'h-56' },
   ];
+
+  // Track current slide for custom dots
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <section className="px-6 lg:px-20 py-10">
@@ -40,14 +44,12 @@ export default function PopularDestinationsSlider() {
           delay: 3500,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-          el: '.custom-pagination',
-        }}
+        pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
           1024: { slidesPerView: 3 },
         }}
+        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)} // Track active slide
         className="popular-destinations-slider"
       >
         {tours.map((tour, index) => (
@@ -61,6 +63,7 @@ export default function PopularDestinationsSlider() {
                   fill
                   sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  priority
                 />
               </div>
 
@@ -85,9 +88,6 @@ export default function PopularDestinationsSlider() {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* PAGINATION DOTS BELOW */}
-      <div className="custom-pagination mt-10 flex justify-center gap-4" />
-    </section>
+      </section>
   );
 }

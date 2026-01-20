@@ -18,8 +18,8 @@ export default function TourCategories() {
     <section className="bg-white py-10 md:py-16">
       {/* HEADER */}
       <div className="mb-10 text-center">
-        <p className="text-2xl font-[cursive] text-[#2a4b4b]">Wonderful Places For You</p>
-        <h2 className="mt-3 text-4xl md:text-5xl font-bold text-[#2a4b4b]">Tour Categories</h2>
+        <p className="text-2xl font-[cursive] text-[#0A7BEE]">Wonderful Places For You</p>
+        <h2 className="mt-3 text-4xl md:text-5xl font-bold text-[#0A7BEE]">Tour Categories</h2>
       </div>
 
       {/* MOBILE VERTICAL ACCORDION */}

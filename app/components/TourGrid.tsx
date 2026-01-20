@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const destinations = [
   { id: 1, title: 'Luxor', image: 'luxor.webp', slug: 'luxor' },
@@ -12,136 +13,124 @@ const destinations = [
   { id: 5, title: 'Black Desert', image: 'black-desert.webp', slug: 'black-desert' },
   { id: 6, title: 'Siwa', image: 'siwa.webp', slug: 'siwa' },
   { id: 7, title: 'Cairo', image: 'cairo.webp', slug: 'cairo' },
-  { id: 8, title: 'Marsa Alam', image: 'marsa-alam.webp', slug: 'marsa-alam' },
-  { id: 9, title: 'Sharm', image: 'sharm.webp', slug: 'sharm' },
-  { id: 10, title: 'Fayoum', image: 'fayoum.webp', slug: 'fayoum' },
 ];
 
 export default function DestinationCarousel() {
   const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(5);
   const [cardWidth, setCardWidth] = useState(260);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [cardHeight, setCardHeight] = useState(320);
 
-  /* RESPONSIVE SETTINGS */
+  /* ------------------ RESPONSIVE ------------------ */
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
+    const resize = () => {
+      const w = window.innerWidth;
 
-      if (width < 640) {
-        setVisibleCount(1);
-        setCardWidth(width - 40);
-      } else if (width < 1024) {
-        setVisibleCount(3);
-        setCardWidth(260);
+      if (w < 640) {
+        setVisible(2);
+        setCardWidth(w * 0.82);
+        setCardHeight(220);
+      } else if (w < 1024) {
+        setVisible(3);
+        setCardWidth(240);
+        setCardHeight(280);
       } else {
-        setVisibleCount(5);
+        setVisible(5);
         setCardWidth(260);
+        setCardHeight(320);
       }
     };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
   }, []);
 
-  const maxIndex = destinations.length - visibleCount;
-
-  /* AUTO SCROLL */
+  /* ------------------ AUTOPLAY ------------------ */
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4000);
+    const t = setTimeout(() => {
+      setIndex((p) => (p + 1) % destinations.length);
+    }, 4200);
+    return () => clearTimeout(t);
+  }, [index]);
 
-    return () => clearInterval(timer);
-  }, [maxIndex]);
+  const total = destinations.length;
+  const center = Math.floor(visible / 2);
 
   return (
-    <section
-      className="relative bg-[#f8f4eb] py-10 overflow-hidden"
-      style={{
-        backgroundImage: "url('/background-image.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay',
-        opacity: 0.95,
-      }}
-    >
+    <section className="relative bg-[#f8f4eb] py-16 overflow-hidden">
       {/* HEADER */}
-      <div className="text-center p-10">
-        <p className="text-2xl font-[cursive] text-[#0A7BBE]">
-          Top Destinations
-        </p>
+      <div className="text-center mb-16">
+        <p className="text-2xl font-[cursive] text-[#0A7BBE]">Top Destinations</p>
         <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">
           Popular Destinations
         </h2>
       </div>
 
       {/* CAROUSEL */}
-      <div className="mt-20 overflow-hidden">
-        <div
-          className="flex gap-6 transition-transform duration-700 ease-out px-5 sm:px-10"
-          style={{ transform: `translateX(-${index * cardWidth}px)` }}
-        >
-          {destinations.map((dest, i) => {
-            const centerIndex = index + Math.floor(visibleCount / 2);
-            const distanceFromCenter = Math.abs(i - centerIndex);
+      <div className="relative h-[260px] sm:h-[340px] lg:h-[400px] max-w-7xl mx-auto flex items-center justify-center">
+        {destinations.map((dest, i) => {
+          let offset = i - index;
+          if (offset > total / 2) offset -= total;
+          if (offset < -total / 2) offset += total;
 
-            /* ARC DEPTH (ONLY FOR LG SCREENS) */
-            const isLargeScreen =
-              typeof window !== 'undefined' && window.innerWidth >= 1024;
+          const distance = Math.abs(offset);
+          const isVisible = distance <= center;
 
-            const translateY = isLargeScreen
-              ? distanceFromCenter * 30
-              : 0;
-
-            const scale =
-              distanceFromCenter === 0 ? 1 : 0.92;
-
-            return (
-              <div
-                key={dest.id}
-                className="shrink-0 transition-all duration-500"
-                style={{
-                  width: cardWidth,
-                  transform: `translateY(${translateY}px) scale(${scale})`,
-                  opacity: distanceFromCenter === 0 ? 1 : 0.75,
-                  zIndex: 10 - distanceFromCenter,
-                }}
-              >
-                {/* IMAGE */}
-                <div className="relative rounded-[48px] p-[3px] bg-white/40 backdrop-blur overflow-hidden shadow-2xl group">
+          return (
+            <motion.div
+              key={dest.id}
+              initial={false} // 🔥 critical
+              animate={{
+                x: offset * cardWidth,
+                y: isVisible ? distance * 26 : 0,
+                scale: distance === 0 ? 1 : 0.94,
+                opacity: isVisible ? 1 - distance * 0.22 : 0,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 140,
+                damping: 22,
+              }}
+              className="absolute pointer-events-none"
+              style={{ zIndex: 10 - distance }}
+            >
+              <div style={{ width: cardWidth }}>
+                <div className="relative rounded-[32px] overflow-hidden shadow-2xl bg-white">
                   <Image
                     src={`/images/tours/${dest.image}`}
                     alt={dest.title}
                     width={cardWidth}
-                    height={240}
-                    className="object-cover rounded-[44px] transition-transform duration-700 ease-out group-hover:scale-110"
+                    height={cardHeight}
+                    priority={distance === 0}
+                    className="object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </div>
 
-                {/* TEXT */}
-                <div className="mt-6 text-center">
+                <div className="mt-4 text-center pointer-events-auto">
                   <Link href={`/destinations/${dest.slug}`}>
-                    <h3 className="text-xl font-bold text-[#0A7BBE] hover:text-[#d6b36b] transition">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#0A7BBE] hover:text-[#d6b36b] transition">
                       {dest.title}
                     </h3>
                     <p className="text-gray-500 text-sm">Explore</p>
                   </Link>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* DOTS */}
-      <div className="mt-12 flex justify-center gap-4">
-        {Array.from({ length: 6 }).map((_, i) => (
+      <div className="mt-14 flex justify-center gap-3">
+        {destinations.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
             className={`h-3 w-3 rounded-full transition ${
-              i === index ? 'bg-[#d6b36b]' : 'border border-[#2a4b4b]'
+              i === index
+                ? 'bg-[#d6b36b]'
+                : 'border border-[#2a4b4b]'
             }`}
           />
         ))}
