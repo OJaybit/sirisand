@@ -5,6 +5,8 @@ import EndlessWonder from './components/EndlessWonder';
 import TourCategories from './components/TourCategories';
 import Professionalguide from './components/Professionalguide'
 import PopularDestinations from './components/PopularDestinations'
+import Recentravel from './components/Recentravel'
+
 export default function HomePage() {
   return (
     <>
@@ -15,6 +17,7 @@ export default function HomePage() {
       <TourCategories />
       <Professionalguide/>
       <PopularDestinations/>
+      <Recentravel/>
     </>
   );
 }

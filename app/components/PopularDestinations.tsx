@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/pagination';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function PopularDestinationsSlider() {
   const tours = [
@@ -23,11 +21,11 @@ export default function PopularDestinationsSlider() {
     { title: 'Grand Egypt Experience', days: '12 Days', image: '/images/tours/11.jpg', height: 'h-56' },
   ];
 
-  // Track current slide for custom dots
   const [currentIndex, setCurrentIndex] = useState(0);
+  const swiperRef = useRef<any>(null);
 
   return (
-    <section className="px-6 lg:px-20 py-10">
+    <section className="px-6 lg:px-20 py-10 relative">
       {/* HEADER */}
       <div className="text-center mb-16">
         <p className="text-2xl font-[cursive] text-[#0A7BBE]">Top Destinations</p>
@@ -36,27 +34,24 @@ export default function PopularDestinationsSlider() {
 
       {/* SWIPER CAROUSEL */}
       <Swiper
-        modules={[Pagination, Autoplay]}
+        modules={[Autoplay]}
         spaceBetween={32}
         slidesPerView={1}
         loop={true}
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-        }}
-        pagination={{ clickable: true }}
+        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
         breakpoints={{
           640: { slidesPerView: 1 },
           1024: { slidesPerView: 3 },
         }}
-        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)} // Track active slide
-        className="popular-destinations-slider"
+        className="popular-destinations-slider mt-5"
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         {tours.map((tour, index) => (
           <SwiperSlide key={index}>
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
               {/* IMAGE */}
-              <div className={`relative w-full ${tour.height} sm:${tour.height} lg:${tour.height} overflow-hidden`}>
+              <div className={`relative w-full ${tour.height} overflow-hidden`}>
                 <Image
                   src={tour.image}
                   alt={tour.title}
@@ -69,17 +64,10 @@ export default function PopularDestinationsSlider() {
 
               {/* CONTENT */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-semibold text-lg text-[#0A3D40] leading-snug">
-                  {tour.title}
-                </h3>
+                <h3 className="font-semibold text-lg text-[#0A3D40] leading-snug">{tour.title}</h3>
                 <div className="mt-auto pt-6 flex items-center justify-between">
                   <span className="text-gray-500 flex items-center gap-2">⏱ {tour.days}</span>
-                  <button
-                    className="min-h-[48px] px-6 rounded-full border border-[#0A7BBE]
-                               text-[#0A7BBE] font-medium
-                               hover:bg-[#0A7BBE] hover:text-white
-                               transition-colors flex items-center"
-                  >
+                  <button className="min-h-[48px] px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center">
                     Book Now →
                   </button>
                 </div>
@@ -88,6 +76,19 @@ export default function PopularDestinationsSlider() {
           </SwiperSlide>
         ))}
       </Swiper>
-      </section>
+
+      {/* MANUAL DOTS */}
+      <div className="mt-10 flex justify-center gap-3">
+        {tours.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => swiperRef.current?.slideToLoop(idx)} // slideToLoop ensures loop works correctly
+            className={`h-3 w-3 -mt-2 rounded-full transition ${
+              idx === currentIndex ? 'bg-[#d6b36b]' : 'border border-[#2a4b4b]'
+            }`}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
