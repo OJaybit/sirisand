@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { pacifico } from '@/app/fonts'
-
+import { motion, type Variants } from "framer-motion";
+import { pacifico } from '@/app/fonts';
 
 const topImages = [
   "abu-simbel.webp",
@@ -23,18 +22,43 @@ const bottomImages = [
   "whale-valley.webp",
 ];
 
+/* ================= ANIMATION VARIANTS ================= */
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
 export default function EndlessWonder() {
   return (
     <section className="relative overflow-hidden bg-white lg:-mt-5 py-10">
       {/* TEXT */}
-      <div className="relative z-10 text-center lg:mt-3 mb-20 px-4">
-        <p className={`text-2xl font-[cursive] text-[#0A7BBE] ${pacifico.className}`}>
+      <motion.div
+        className="relative z-10 text-center lg:mt-3 mb-20 px-4"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.6 }}
+      >
+        <motion.p
+          variants={item}
+          className={`text-2xl font-[cursive] text-[#0A7BBE] ${pacifico.className}`}
+        >
           Endless Wonder
-        </p>
-        <h2 className="mt-3 lg:text-5xl font-bold text-[#0A7BBE] max-w-3xl mx-auto leading-tight">
+        </motion.p>
+        <motion.h2
+          variants={item}
+          className="mt-3 lg:text-5xl font-bold text-[#0A7BBE] max-w-3xl mx-auto leading-tight"
+        >
           Discover 7000 Years of <br /> Egyptian Civilization
-        </h2>
-      </div>
+        </motion.h2>
+      </motion.div>
 
       {/* TOP ROW (RIGHT → LEFT) */}
       <div className="mx-auto max-w-[95vw] overflow-hidden">
@@ -91,16 +115,17 @@ export default function EndlessWonder() {
             </div>
           ))}
         </motion.div>
- <div className="mt-8 w-80 h-80 overflow-hidden shadow-xl mx-auto block sm:hidden">
-  <Image
-    src={`/images/trending/map.png`}
-    alt="Egypt Destination"
-    width={400}
-    height={300}
-    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-  />
-</div>
 
+        {/* MOBILE MAP IMAGE */}
+        <div className="mt-8 w-80 h-80 overflow-hidden shadow-xl mx-auto block sm:hidden">
+          <Image
+            src={`/images/trending/map.png`}
+            alt="Egypt Destination"
+            width={400}
+            height={300}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
+        </div>
       </div>
     </section>
   );

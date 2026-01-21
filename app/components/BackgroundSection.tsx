@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { pacifico } from '@/app/fonts'
+import { motion, type Variants } from 'framer-motion';
+import { pacifico } from '@/app/fonts';
 
 const bgImages = [
   '/bg/bg1.png',
@@ -21,35 +21,66 @@ const bgImages = [
 const getSixImages = (start: number) =>
   Array.from({ length: 6 }).map((_, i) => bgImages[(start + i) % bgImages.length]);
 
+/* ================= ANIMATION VARIANTS ================= */
+
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
+
 export default function BackgroundAnimationPage() {
   return (
     <section className="relative flex items-center justify-center h-[510px] lg:h-120 bg-white">
-
-      {/* Rounded background container (top only) */}
+      {/* Rounded background container */}
       <div className="relative w-full h-full rounded-t-[100px] overflow-hidden bg-[#faf6ef]">
 
         {/* ================= CENTERED TEXT ================= */}
-        <div className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-3xl">
+        <motion.div
+          className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-3xl"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          {/* Script title */}
+          <motion.p
+            variants={item}
+            className={`text-lg sm:text-2xl text-[#0A7BBE] whitespace-nowrap ${pacifico.className}`}
+          >
+            Best Recommended Places
+          </motion.p>
 
-          <div className="text-center mb-0 -mt-5">
-           <p
-  className={`text-lg sm:text-2xl text-[#0A7BBE] whitespace-nowrap ${pacifico.className}`}
->
-  Best Recommended Places
-</p>
+          {/* Heading */}
+          <motion.h2
+            variants={item}
+            className="mt-3 text-xl sm:text-4xl mb-5 lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2"
+          >
+            Popular Destinations we offer for all
+          </motion.h2>
 
-
-            <h2 className="mt-3 text-xl sm:text-4xl mb-5 lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2">
-              Popular Destinations we offer for all
-            </h2>
-          </div>
-
-          <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed break-normal">
+          {/* Description */}
+          <motion.p
+            variants={item}
+            className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed break-normal"
+          >
             Explore the beauty of Egypt with unforgettable group tours to amazing destinations like
             Siwa Oasis, the White Desert, Luxor, Aswan and Fayoum. Let's go together and create
             memories that will stay with you forever.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* ================= TOP ROW ================= */}
         <motion.div
@@ -107,6 +138,7 @@ export default function BackgroundAnimationPage() {
             />
           ))}
         </motion.div>
+
       </div>
     </section>
   );

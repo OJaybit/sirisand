@@ -5,8 +5,27 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useState, useRef } from 'react';
-import { pacifico } from '@/app/fonts'
+import { motion, type Variants } from 'framer-motion';
+import { pacifico } from '@/app/fonts';
 
+/* ================= ANIMATION VARIANTS ================= */
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
 
 export default function PopularDestinationsSlider() {
   const tours = [
@@ -40,13 +59,25 @@ export default function PopularDestinationsSlider() {
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-25">
-        <p className={`${pacifico.className} mb-2  text-sm sm:text-lg md:text-xl lg:text-2xl -mt-5 text-[#0A7BBE]`}>
+      <motion.div
+        className="relative z-10 mx-auto max-w-6xl px-4 py-25"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.6 }}
+      >
+        <motion.p
+          variants={item}
+          className={`${pacifico.className} mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl -mt-5 text-[#0A7BBE]`}
+        >
           Travel Stories & Insights
-        </p>
+        </motion.p>
 
         {/* ====== On mobile, stack vertically ====== */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <motion.div
+          variants={item}
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
             Explore More with Our Articles
           </h2>
@@ -75,8 +106,8 @@ export default function PopularDestinationsSlider() {
               </span>
             </span>
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* ================= SWIPER CAROUSEL ================= */}
       <Swiper
@@ -98,7 +129,7 @@ export default function PopularDestinationsSlider() {
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
 
               {/* IMAGE */}
-              <div className="relative w-full h-80 overflow-hidden">
+              <div className="relative w-full h-64 sm:h-72 lg:h-80 overflow-hidden">
                 <Image
                   src={tour.image}
                   alt={tour.title}

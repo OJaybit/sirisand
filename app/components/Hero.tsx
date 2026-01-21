@@ -64,7 +64,7 @@ export default function Hero() {
 function TextBlock({ slide }: { slide: any }) {
   return (
     <motion.div
-      className="max-w-4xl text-left text-[#0A7BBE] lg mt-15"
+      className="max-w-4xl text-left text-WHITE lg mt-15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -85,7 +85,7 @@ function TextBlock({ slide }: { slide: any }) {
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-[#0A7BBE] max-w-2xl"
+        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-white max-w-2xl"
       >
         {slide.text}
       </motion.p>

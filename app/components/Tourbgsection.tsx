@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { pacifico } from '@/app/fonts'
-
+import { pacifico } from '@/app/fonts';
+import { motion, type Variants } from 'framer-motion';
 
 const bgImages = [
   '/bg/bg1.png',
@@ -11,15 +11,24 @@ const bgImages = [
   '/bg/bg4.png',
   '/bg/bg5.png',
   '/bg/bg6.png',
-  // '/bg/bg7.jpg',
-  // '/bg/bg8.png',
-  // '/bg/bg9.jpg',
-  // '/bg/bg10.jpg',
 ];
 
 // helper: get exactly 6 images per row
 const getSixImages = (start: number) =>
   Array.from({ length: 6 }).map((_, i) => bgImages[(start + i) % bgImages.length]);
+
+/* ================= ANIMATION VARIANTS ================= */
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
 
 export default function BackgroundSection() {
   return (
@@ -54,15 +63,27 @@ export default function BackgroundSection() {
           ))}
         </div>
 
-        {/* HEADER */}
-        <div className="relative z-10 text-center mb-16">
-          <p className={`text-2xl font-[cursive] text-[#0A7BBE] -mt-5 lg:-mt-15 ${pacifico.className}`}>
+        {/* HEADER WITH ANIMATION */}
+        <motion.div
+          className="relative z-10 text-center mb-16"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          <motion.p
+            variants={item}
+            className={`text-2xl font-[cursive] text-[#0A7BBE] -mt-5 lg:-mt-15 ${pacifico.className}`}
+          >
             Top Destinations
-          </p>
-          <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">
+          </motion.p>
+          <motion.h2
+            variants={item}
+            className="mt-2 text-5xl font-bold text-[#0A7BBE]"
+          >
             Popular Destinations
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
       </section>
 
       {/* ================= MOBILE ONLY ================= */}
@@ -83,18 +104,30 @@ export default function BackgroundSection() {
           </div>
         </div>
 
-        {/* TEXT */}
-        <div className="text-center px-4 mt-12">
-          <p className={`text-base font-[cursive] text-[#0A7BBE] leading-tight ${pacifico.className} -mt-2`}>
+        {/* TEXT WITH ANIMATION */}
+        <motion.div
+          className="text-center px-4 mt-12"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          <motion.p
+            variants={item}
+            className={`text-base font-[cursive] text-[#0A7BBE] leading-tight ${pacifico.className} -mt-2`}
+          >
             Top Destinations
-          </p>
-          <h2 className="text-2xl mt-2 font-bold text-[#0A7BBE] leading-tight">
+          </motion.p>
+          <motion.h2
+            variants={item}
+            className="text-2xl mt-2 font-bold text-[#0A7BBE] leading-tight"
+          >
             Popular Destinations
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
       </section>
 
-      {/* ================= ANIMATION ================= */}
+      {/* ================= ANIMATION FOR MARQUEE ================= */}
       <style jsx>{`
         .animate-marquee-slow {
           width: max-content;
