@@ -31,7 +31,7 @@ export default function BackgroundAnimationPage() {
         <div className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-3xl">
 
           <div className="text-center mb-0 -mt-5">
-            <p className="text-lg sm:text-2xl font-[cursive] text-[#0A7BBE]whitespace-nowrap">
+            <p className="text-lg sm:text-2xl font-[cursive] text-[#0A7BBE] whitespace-nowrap">
               Best Recommended Places
             </p>
 
