@@ -1,9 +1,11 @@
-import AboutUs from '../components/AboutUs';
+import AboutUsSection from "../components/AboutUs";
+import NewsletterSection from "../components/Newsletter";
 
-export default function AboutPage() {
+export default function AboutUsPage() {
   return (
     <main className="pt-32">
-      <AboutUs />
+      <AboutUsSection />
+      <NewsletterSection/>
     </main>
   );
 }

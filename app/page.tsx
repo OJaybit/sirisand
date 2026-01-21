@@ -11,6 +11,8 @@ import Tourbgsection from './components/Tourbgsection'
 import StatsCircles from './components/StatsCircles'
 import Explore from './components/Explore'
 import Animation from './components/Animation'
+import Newsletter from './components/Newsletter'
+import Footer from './components/Footer';
 
 export default function HomePage() {
   return (
@@ -28,6 +30,8 @@ export default function HomePage() {
       <StatsCircles/>
       <Animation/>
       <Explore/>
+      <Newsletter/>
+      <Footer/>
     </>
   );
 }

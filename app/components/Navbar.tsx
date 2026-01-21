@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Trips', href: '#tours' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: "Home", href: "/" },
+  { label: "Trips", href: "/trip" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/aboutus" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -20,8 +20,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -30,40 +30,41 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed top-0 z-50 w-full transition-all duration-500 ${
           scrolled
-            ? 'bg-black/80 backdrop-blur-md shadow-lg'
-            : 'bg-transparent'
+            ? "bg-black/80 backdrop-blur-md shadow-lg"
+            : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
           {/* LOGO */}
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="Siri Sand Tour Logo"
-              width={40}
-              height={40}
-              priority
-              className="h-10 w-10"
-            />
-          </Link>
+          {/* LOGO */}
+<Link href="/" className="flex items-center justify-center pl-8">
+  <Image
+    src="/logo.png"
+    alt="Siri Sand Tour Logo"
+    width={80}  
+    height={100} 
+    priority
+  />
+</Link>
+
 
           {/* DESKTOP LINKS */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden md:flex pr-15 items-center gap-4">
             {navLinks.map((link) => (
               <NavLink key={link.href} href={link.href}>
                 {link.label}
               </NavLink>
             ))}
 
-            <a
-              href="#tours"
-              className="rounded-full bg-[#d6b36b] px-6 py-2 text-sm font-semibold text-black transition hover:bg-[#0A7BBE]"
+            <Link
+              href="/trip"
+              className="rounded-full bg-[#0A7BBE] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#d6b36b]"
             >
               Book Now
-            </a>
+            </Link>
           </div>
 
           {/* MOBILE MENU BUTTON */}
@@ -85,39 +86,44 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
               className="fixed inset-0 z-40 bg-black/40"
               onClick={() => setMobileOpen(false)}
             />
 
-            {/* RIGHT DRAWER */}
+            {/* DRAWER */}
             <motion.aside
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 260, damping: 28 }}
-              className="fixed right-0 top-0 z-50 h-full w-1/2 bg-white shadow-2xl"
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 260, damping: 28 }}
+              className="fixed right-0 top-0 z-50 h-full w-3/5 bg-black shadow-2xl"
             >
-              {/* CLOSE BUTTON */}
               <button
-                className="absolute right-5 top-5 text-3xl text-black"
+                className="absolute right-5 top-5 text-3xl text-white"
                 onClick={() => setMobileOpen(false)}
               >
                 <HiOutlineX />
               </button>
 
-              {/* NAV LINKS */}
-              <nav className="mt-24 flex flex-col items-center gap-8">
+              <nav className="mt-24 flex flex-col items-center gap-6">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-xl font-medium text-[#0A7BBE]"
+                    className="text-xl font-medium text-white hover:text-[#d6b36b] transition"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
+
+                <Link
+                  href="/trip"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-6 rounded-full bg-[#0A7BBE] px-6 py-2 text-white font-semibold hover:bg-[#d6b36b] transition"
+                >
+                  Book Now
+                </Link>
               </nav>
             </motion.aside>
           </>
@@ -127,7 +133,7 @@ export default function Navbar() {
   );
 }
 
-/* ---------------- LINK COMPONENT ---------------- */
+/* ---------------- NAV LINK ---------------- */
 
 function NavLink({
   href,
@@ -137,12 +143,12 @@ function NavLink({
   children: React.ReactNode;
 }) {
   return (
-    <a
+    <Link
       href={href}
-      className="group relative text-sm font-medium text-gold"
+      className="group relative text-sm font-medium text-white px-3 hover:text-[#d6b36b] transition"
     >
       {children}
-      <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 bg-white transition-all duration-300 group-hover:w-full" />
-    </a>
+      <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 bg-[#d6b36b] transition-all duration-300 group-hover:w-full" />
+    </Link>
   );
 }
