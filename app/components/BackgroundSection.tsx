@@ -22,7 +22,7 @@ const getSixImages = (start: number) =>
 
 export default function BackgroundAnimationPage() {
   return (
-    <section className="relative flex items-center justify-center h-[550px] lg:h-screen bg-white">
+    <section className="relative flex items-center justify-center h-[510px] lg:h-120 bg-white">
 
       {/* Rounded background container (top only) */}
       <div className="relative w-full h-full rounded-t-[100px] overflow-hidden bg-[#faf6ef]">
@@ -35,7 +35,7 @@ export default function BackgroundAnimationPage() {
               Best Recommended Places
             </p>
 
-            <h2 className="mt-2 text-xl sm:text-4xl lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2">
+            <h2 className="mt-3 text-xl sm:text-4xl mb-5 lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2">
               Popular Destinations we offer for all
             </h2>
           </div>
