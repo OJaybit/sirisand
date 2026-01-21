@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { pacifico } from '@/app/fonts'
 
 const bgImages = [
   '/bg/bg1.png',
@@ -31,9 +32,12 @@ export default function BackgroundAnimationPage() {
         <div className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-3xl">
 
           <div className="text-center mb-0 -mt-5">
-            <p className="text-lg sm:text-2xl font-[cursive] text-[#0A7BBE] whitespace-nowrap">
-              Best Recommended Places
-            </p>
+           <p
+  className={`text-lg sm:text-2xl text-[#0A7BBE] whitespace-nowrap ${pacifico.className}`}
+>
+  Best Recommended Places
+</p>
+
 
             <h2 className="mt-3 text-xl sm:text-4xl mb-5 lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2">
               Popular Destinations we offer for all

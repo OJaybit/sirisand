@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import { pacifico } from '@/app/fonts'
+
 
 const bgImages = [
   '/bg/bg1.png',
@@ -54,7 +56,7 @@ export default function BackgroundSection() {
 
         {/* HEADER */}
         <div className="relative z-10 text-center mb-16">
-          <p className="text-2xl font-[cursive] text-[#0A7BBE] -mt-5 lg:-mt-15">
+          <p className={`text-2xl font-[cursive] text-[#0A7BBE] -mt-5 lg:-mt-15 ${pacifico.className}`}>
             Top Destinations
           </p>
           <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">
@@ -83,10 +85,10 @@ export default function BackgroundSection() {
 
         {/* TEXT */}
         <div className="text-center px-4 mt-12">
-          <p className="text-base font-[cursive] text-[#0A7BBE] leading-tight">
+          <p className={`text-base font-[cursive] text-[#0A7BBE] leading-tight ${pacifico.className} -mt-2`}>
             Top Destinations
           </p>
-          <h2 className="text-2xl font-bold text-[#0A7BBE] leading-tight">
+          <h2 className="text-2xl mt-2 font-bold text-[#0A7BBE] leading-tight">
             Popular Destinations
           </h2>
         </div>

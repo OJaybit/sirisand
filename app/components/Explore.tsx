@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useState, useRef } from 'react';
+import { pacifico } from '@/app/fonts'
+
 
 export default function PopularDestinationsSlider() {
   const tours = [
@@ -39,7 +41,7 @@ export default function PopularDestinationsSlider() {
 
       {/* ================= CONTENT ================= */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-25">
-        <p className="mb-2 font-[cursive] text-sm sm:text-lg md:text-xl lg:text-2xl -mt-5 text-[#0A7BBE]">
+        <p className={`${pacifico.className} mb-2  text-sm sm:text-lg md:text-xl lg:text-2xl -mt-5 text-[#0A7BBE]`}>
           Travel Stories & Insights
         </p>
 

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { pacifico } from '@/app/fonts'
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
@@ -18,7 +19,7 @@ export default function TourCategories() {
     <section className="bg-white py-10 md:py-16">
       {/* HEADER */}
       <div className="mb-10 text-center">
-        <p className="text-2xl font-[cursive] text-[#0A7BBE]">Wonderful Places For You</p>
+        <p className={`${pacifico.className} text-2xl font-[cursive] text-[#0A7BBE]`}>Wonderful Places For You</p>
         <h2 className="mt-3 text-4xl md:text-5xl font-bold text-[#0A7BBE]">Tour Categories</h2>
       </div>
 

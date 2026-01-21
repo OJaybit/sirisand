@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { pacifico } from '@/app/fonts'
+
 
 export default function TripSection() {
   return (
@@ -16,7 +18,9 @@ export default function TripSection() {
           transition={{ duration: 0.6 }}
           className="order-1 lg:order-2 flex flex-col gap-10 max-w-xl"
         >
-          <p className="font-[cursive] text-[#0A7BBE] text-xl ">
+          <p
+  className={`text-lg sm:text-2xl text-[#0A7BBE] whitespace-nowrap ${pacifico.className}`}
+>
             Let’s Go Together
           </p>
 

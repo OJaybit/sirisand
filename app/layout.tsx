@@ -1,5 +1,7 @@
 import './globals.css'
 import Navbar from './components/Navbar'
+import { Pacifico } from 'next/font/google'
+
 
 export default function RootLayout({
   children,
@@ -8,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col flex-1">
+      <body className="min-h-screen flex flex-col flex-1 pacifico.className">
         
         {/* HEADER */}
         <Navbar />

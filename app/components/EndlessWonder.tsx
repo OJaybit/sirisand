@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { pacifico } from '@/app/fonts'
+
 
 const topImages = [
   "abu-simbel.webp",
@@ -26,7 +28,7 @@ export default function EndlessWonder() {
     <section className="relative overflow-hidden bg-white lg:-mt-5 py-10">
       {/* TEXT */}
       <div className="relative z-10 text-center lg:mt-3 mb-20 px-4">
-        <p className="text-2xl font-[cursive] text-[#0A7BBE]">
+        <p className={`text-2xl font-[cursive] text-[#0A7BBE] ${pacifico.className}`}>
           Endless Wonder
         </p>
         <h2 className="mt-3 lg:text-5xl font-bold text-[#0A7BBE] max-w-3xl mx-auto leading-tight">
