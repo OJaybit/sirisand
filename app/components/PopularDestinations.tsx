@@ -25,13 +25,8 @@ export default function PopularDestinationsSlider() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <section className="px-6 lg:px-20 py-10 relative">
-      {/* HEADER */}
-      <div className="text-center mb-16">
-        <p className="text-2xl font-[cursive] text-[#0A7BBE]">Top Destinations</p>
-        <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">Popular Destinations</h2>
-      </div>
-
+    <section className="px-6 lg:px-20 py-2 -mt-40 relative">
+    
       {/* SWIPER CAROUSEL */}
       <Swiper
         modules={[Autoplay]}
@@ -51,22 +46,23 @@ export default function PopularDestinationsSlider() {
           <SwiperSlide key={index}>
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
               {/* IMAGE */}
-              <div className={`relative w-full ${tour.height} overflow-hidden`}>
-                <Image
-                  src={tour.image}
-                  alt={tour.title}
-                  fill
-                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  priority
-                />
-              </div>
+             <div className="relative w-full h-80 overflow-hidden">
+  <Image
+    src={tour.image}
+    alt={tour.title}
+    fill
+    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
+    className="object-cover transition-transform duration-500 group-hover:scale-110"
+    priority
+  />
+</div>
+
 
               {/* CONTENT */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-semibold text-lg text-[#0A3D40] leading-snug">{tour.title}</h3>
+                <h3 className="font-semibold text-lg text-gray-600 leading-snug">{tour.title}</h3>
                 <div className="mt-auto pt-6 flex items-center justify-between">
-                  <span className="text-gray-500 flex items-center gap-2">⏱ {tour.days}</span>
+                  <span className="text-gray-600 flex items-center gap-2">⏱ {tour.days}</span>
                   <button className="min-h-[48px] px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center">
                     Book Now →
                   </button>
@@ -89,6 +85,19 @@ export default function PopularDestinationsSlider() {
           />
         ))}
       </div>
+
+<div className="mt-5 sm:hidden mt-6 w-full flex justify-center">
+  <video
+    src="/images/tours/video1.webm"
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="w-full max-w-md h-180 rounded-xl shadow-lg object-cover"
+  />
+</div>
+
+
     </section>
   );
 }

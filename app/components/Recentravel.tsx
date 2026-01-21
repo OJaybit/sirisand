@@ -11,6 +11,7 @@ import {
   HiOutlineShare,
 } from 'react-icons/hi';
 
+
 const images = [
   '/images/gallery/1.jpg',
   '/images/gallery/2.jpg',
@@ -70,18 +71,19 @@ export default function RecentTravelMoments() {
 
   return (
     <>
+    
       {/* GALLERY */}
       <section className="bg-white py-28">
         <div className="mx-auto max-w-7xl px-4">
           {/* HEADER */}
-          <div className="mb-24 text-center">
+          {/* <div className="mb-24 text-center">
             <p className="mb-4 font-[cursive] text-2xl text-[#0A7BBE]">
               Embark on a soul-stirring journey
             </p>
             <h2 className="text-5xl font-bold text-[#123c3c]">
               Recent travel moments
             </h2>
-          </div>
+          </div> */}
 
           {/* DESKTOP GRID */}
           <div className="hidden lg:grid grid-cols-5 gap-10">

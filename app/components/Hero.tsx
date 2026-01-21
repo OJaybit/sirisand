@@ -34,7 +34,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative z-0 h-screen w-full overflow-hidden">
       {/* 🎥 VIDEO BACKGROUND */}
       <video
         suppressHydrationWarning

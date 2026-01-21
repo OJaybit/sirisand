@@ -23,9 +23,9 @@ const bottomImages = [
 
 export default function EndlessWonder() {
   return (
-    <section className="relative overflow-hidden bg-[#f8f4eb] -mt-4 py-10">
+    <section className="relative overflow-hidden bg-white lg:-mt-5 py-10">
       {/* TEXT */}
-      <div className="relative z-10 text-center -mt-7 mb-20 px-4">
+      <div className="relative z-10 text-center lg:mt-3 mb-20 px-4">
         <p className="text-2xl font-[cursive] text-[#0A7BBE]">
           Endless Wonder
         </p>
@@ -89,6 +89,16 @@ export default function EndlessWonder() {
             </div>
           ))}
         </motion.div>
+ <div className="mt-8 w-80 h-80 overflow-hidden shadow-xl mx-auto block sm:hidden">
+  <Image
+    src={`/images/trending/map.png`}
+    alt="Egypt Destination"
+    width={400}
+    height={300}
+    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+  />
+</div>
+
       </div>
     </section>
   );

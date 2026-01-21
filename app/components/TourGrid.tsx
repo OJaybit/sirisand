@@ -58,17 +58,17 @@ export default function DestinationCarousel() {
   const center = Math.floor(visible / 2);
 
   return (
-    <section className="relative bg-[#f8f4eb] py-16 overflow-hidden">
-      {/* HEADER */}
+    <section className="relative z-10  lg:bg-whte py-5 lg:-mt-20 overflow-hidden bg:white">
+      {/* HEADER
       <div className="text-center mb-16">
         <p className="text-2xl font-[cursive] text-[#0A7BBE]">Top Destinations</p>
         <h2 className="mt-2 text-5xl font-bold text-[#0A7BBE]">
           Popular Destinations
         </h2>
-      </div>
+      </div> */}
 
       {/* CAROUSEL */}
-      <div className="relative h-[260px] sm:h-[340px] lg:h-[400px] max-w-7xl mx-auto flex items-center justify-center">
+      <div className="relative h-[260px] sm:h-[340px] lg:h-[400px] max-w-7xl mx-auto lg:-mt-20 flex items-center justify-center">
         {destinations.map((dest, i) => {
           let offset = i - index;
           if (offset > total / 2) offset -= total;
@@ -122,7 +122,7 @@ export default function DestinationCarousel() {
       </div>
 
       {/* DOTS */}
-      <div className="mt-14 flex justify-center gap-3">
+      <div className="mt-14 lg:-mt-3 flex justify-center gap-3">
         {destinations.map((_, i) => (
           <button
             key={i}
