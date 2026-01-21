@@ -22,19 +22,20 @@ const getSixImages = (start: number) =>
 
 export default function BackgroundAnimationPage() {
   return (
-    <section className="relative flex items-center justify-center h-[420px] lg:h-screen bg-white">
+    <section className="relative flex items-center justify-center h-[550px] lg:h-screen bg-white">
 
       {/* Rounded background container (top only) */}
       <div className="relative w-full h-full rounded-t-[100px] overflow-hidden bg-[#faf6ef]">
 
         {/* ================= CENTERED TEXT ================= */}
-        <div className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-2xl">
+        <div className="absolute top-28 left-1/2 -translate-x-1/2 text-center px-4 sm:px-10 max-w-3xl">
 
-          <div className="text-center mb-0 -mt-20">
-            <p className="text-lg sm:text-2xl font-[cursive] text-[#0A7BBE]">
+          <div className="text-center mb-0 -mt-5">
+            <p className="text-lg sm:text-2xl font-[cursive] text-[#0A7BBE]whitespace-nowrap">
               Best Recommended Places
             </p>
-            <h2 className="mt-2 text-xl sm:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
+
+            <h2 className="mt-2 text-xl sm:text-4xl lg:text-5xl font-bold text-[#0A7BBE] w-70 lg:w-220 line-clamp-2">
               Popular Destinations we offer for all
             </h2>
           </div>
@@ -86,7 +87,7 @@ export default function BackgroundAnimationPage() {
 
         {/* ================= BOTTOM ROW ================= */}
         <motion.div
-          className="pointer-events-none absolute bottom-10 left-0 flex w-full justify-center gap-10 sm:gap-24 opacity-10 sm:hidden"
+          className="pointer-events-none absolute bottom-10 left-0 flex w-full justify-center gap-10 sm:gap-24 opacity-10"
           initial={{ y: 0 }}
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -98,7 +99,7 @@ export default function BackgroundAnimationPage() {
               alt=""
               width={80}
               height={80}
-              className="object-contain sm:w-[140px] sm:hidden"
+              className="object-contain sm:w-[140px]"
             />
           ))}
         </motion.div>
