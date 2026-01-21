@@ -50,7 +50,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
 
       {/* TEXT LAYER */}
-      <div className="relative z-10 flex h-full items-center justify-start px-6 lg:px-20">
+      <div className="relative z-10 flex h-full items-center mt-10 lg:mt-1 justify-start px-6 lg:px-20">
         <AnimatePresence mode="wait">
           <TextBlock key={current} slide={slides[current]} />
         </AnimatePresence>
@@ -64,7 +64,7 @@ export default function Hero() {
 function TextBlock({ slide }: { slide: any }) {
   return (
     <motion.div
-      className="max-w-4xl text-left text-white lg mt-15"
+      className="max-w-4xl text-left text-[#0A7BBE] lg mt-15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -85,7 +85,7 @@ function TextBlock({ slide }: { slide: any }) {
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-white/90 max-w-2xl"
+        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-[#0A7BBE] max-w-2xl"
       >
         {slide.text}
       </motion.p>
@@ -96,14 +96,14 @@ function TextBlock({ slide }: { slide: any }) {
         <button
           className="
             relative overflow-hidden w-fit px-8 py-4 rounded-full
-            bg-[#d6b36b] border border-[#2a4b4b]
+            bg-[#0A7BBE] border border-[#2a4b4b]
             text-white font-semibold
             group
           "
         >
           <span
             className="
-              absolute inset-0 bg-[#0A7BBE]
+              absolute inset-0 bg-[#d6b36b]
               translate-x-[-100%]
               group-hover:translate-x-0
               transition-transform duration-500 ease-out

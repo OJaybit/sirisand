@@ -16,11 +16,11 @@ export default function TripSection() {
           transition={{ duration: 0.6 }}
           className="order-1 lg:order-2 flex flex-col gap-10 max-w-xl"
         >
-          <p className="font-[cursive] text-[#0A7BEE] text-xl ">
+          <p className="font-[cursive] text-[#0A7BBE] text-xl ">
             Let’s Go Together
           </p>
 
-          <h1 className="text-5xl font-bold text-[#0A7BEE] -mt-5 leading-tight">
+          <h1 className="text-5xl font-bold text-[#0A7BBE] -mt-5 leading-tight">
             Plan Your <br /> Trip With us
           </h1>
 
@@ -42,7 +42,7 @@ export default function TripSection() {
                            transition-colors duration-300"
               />
               <div>
-                <h3 className="font-semibold text-lg text-[#0A7BEE]">
+                <h3 className="font-semibold text-lg text-[#0A7BBE]">
                   Exclusive Trip
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -60,7 +60,7 @@ export default function TripSection() {
                            transition-colors duration-300"
               />
               <div>
-                <h3 className="font-semibold text-lg text-[#0A7BEE]">
+                <h3 className="font-semibold text-lg text-[#0A7BBE]">
                   Professional Guide
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
