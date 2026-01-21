@@ -11,10 +11,10 @@ const bgImages = [
   '/bg/bg4.png',
   '/bg/bg5.png',
   '/bg/bg6.png',
-  '/bg/bg7.jpg',
-  '/bg/bg8.png',
-  '/bg/bg9.jpg',
-  '/bg/bg10.jpg',
+  // '/bg/bg7.jpg',
+  // '/bg/bg8.png',
+  // '/bg/bg9.jpg',
+  // '/bg/bg10.jpg',
 ];
 
 // helper: get exactly 6 images per row
