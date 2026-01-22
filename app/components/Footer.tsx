@@ -20,24 +20,17 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center -ml-6 gap-3 -mt-25  mb-5">
             <Image
               src="/logo.png"
               alt="Siri Sand Tour"
-              width={60}
+              width={180}
               height={60}
             />
-            <div>
-              <h2 className="text-xl font-semibold text-[#0A7BBE]">
-                Siri Sand Tour
-              </h2>
-              <p className="text-sm text-gray-400">
-                Desert Adventures
-              </p>
-            </div>
+            
           </div>
 
-          <p className="text-gray-600 leading-relaxed mb-6">
+          <p className="text-gray-600 leading-relaxed -mt-20 mb-6">
            From golden deserts to vibrant cultural landmarks, we bring you the authentic experiences that make Egypt truly unforgettable.
           </p>
 
