@@ -34,7 +34,7 @@ export default function BackgroundSection() {
   return (
     <>
       {/* ================= DESKTOP / LG (UNCHANGED) ================= */}
-      <section className="relative overflow-visible h-60 bg-[#faf6ef] pt-44 pb-40 z-10 lg:z-0 hidden lg:block">
+      <section className="relative overflow-visible h-60 bg-[#faf6ef] pt-42 pb-40 z-10 lg:z-0 hidden lg:block">
         {/* TOP ROW */}
         <div className="pointer-events-none absolute -top-2 left-0 flex w-full justify-center gap-24 opacity-[0.08] z-0">
           {getSixImages(0).map((img, i) => (
@@ -73,7 +73,7 @@ export default function BackgroundSection() {
         >
           <motion.p
             variants={item}
-            className={`text-2xl font-[cursive] text-[#0A7BBE] -mt-5 lg:-mt-15 ${pacifico.className}`}
+            className={`text-2xl font-[cursive] text-[#0A7BBE] lg:-mt-20 ${pacifico.className}`}
           >
             Top Destinations
           </motion.p>
@@ -87,7 +87,7 @@ export default function BackgroundSection() {
       </section>
 
       {/* ================= MOBILE ONLY ================= */}
-      <section className="block lg:hidden bg-white mt-4 pb-5 overflow-hidden">
+      <section className="block lg:hidden bg-white mt-8 pb-5 overflow-hidden">
         {/* MOVING IMAGES */}
         <div className="relative w-full overflow-hidden">
           <div className="flex gap-6 animate-marquee-slow">
@@ -106,7 +106,7 @@ export default function BackgroundSection() {
 
         {/* TEXT WITH ANIMATION */}
         <motion.div
-          className="text-center px-4 mt-12"
+          className="text-center px-4 mt-15"
           variants={container}
           initial="hidden"
           whileInView="visible"
@@ -114,7 +114,7 @@ export default function BackgroundSection() {
         >
           <motion.p
             variants={item}
-            className={`text-base font-[cursive] text-[#0A7BBE] leading-tight ${pacifico.className} -mt-2`}
+            className={`text-base font-[cursive] text-[#0A7BBE] leading-tight ${pacifico.className} mt2`}
           >
             Top Destinations
           </motion.p>

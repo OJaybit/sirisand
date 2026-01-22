@@ -129,7 +129,7 @@ export default function DestinationCarousel() {
             onClick={() => setIndex(i)}
             className={`h-3 w-3 rounded-full transition ${
               i === index
-                ? 'bg-[#d6b36b]'
+                ? 'bg-[#0A7BBE]'
                 : 'border border-[#2a4b4b]'
             }`}
           />

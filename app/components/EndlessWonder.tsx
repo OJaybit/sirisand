@@ -37,7 +37,8 @@ const item: Variants = {
 
 export default function EndlessWonder() {
   return (
-    <section className="relative overflow-hidden bg-white lg:-mt-5 py-10">
+    <section className="relative mt-10 overflow-hidden bg-white lg:mt-12 py-6 lg:py-4">
+
       {/* TEXT */}
       <motion.div
         className="relative z-10 text-center lg:mt-3 mb-20 px-4"
@@ -48,22 +49,32 @@ export default function EndlessWonder() {
       >
         <motion.p
           variants={item}
-          className={`text-2xl font-[cursive] text-[#0A7BBE] ${pacifico.className}`}
+          className={`text-4xl font-[cursive] text-[#0A7BBE] ${pacifico.className}`}
         >
           Endless Wonder
         </motion.p>
-        <motion.h2
-          variants={item}
-          className="mt-3 lg:text-5xl font-bold text-[#0A7BBE] max-w-3xl mx-auto leading-tight"
-        >
-          Discover 7000 Years of <br /> Egyptian Civilization
-        </motion.h2>
+   <motion.h2
+  variants={item}
+  className="mt-3 font-bold text-[#0A7BBE] leading-tight text-center flex justify-center lg:text-left"
+>
+  {/* Mobile version (broken, larger text) */}
+  <span className="block lg:hidden text-3xl sm:text-5xl md:text-6xl">
+    Discover 7000 Years of <br /> Egyptian Civilization
+  </span>
+
+  {/* Large screens (single line, slightly smaller if needed) */}
+  <span className="hidden lg:inline lg:text-4xl xl:text-5xl">
+    Discover 7000 Years of Egyptian Civilization
+  </span>
+</motion.h2>
+
       </motion.div>
 
       {/* TOP ROW (RIGHT → LEFT) */}
-      <div className="mx-auto max-w-[95vw] overflow-hidden">
+     <div className="mx-auto mt-4 lg:mt-2 max-w-[95vw] overflow-hidden">
+
         <motion.div
-          className="flex gap-4 sm:gap-8 w-max"
+          className="flex gap-4 sm:gap-4 lg:gap-3 w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
@@ -74,13 +85,26 @@ export default function EndlessWonder() {
           {[...topImages, ...topImages].map((img, i) => (
             <div
               key={`top-${i}`}
-              className="group w-[calc(33.333vw-16px)] sm:w-[320px] h-[180px] sm:h-[220px] rounded-[32px] overflow-hidden shadow-xl"
+            className="
+              group
+              w-[calc(30vw-12px)]
+              sm:w-[280px]
+              lg:w-[200px]      /* narrower */
+              h-[160px]
+              sm:h-[200px]
+              lg:h-[280px]      /* shorter */
+              rounded-[28px]
+              overflow-hidden
+              shadow-lg lg:shadow-md
+            "
+
+
             >
               <Image
                 src={`/images/trending/${img}`}
                 alt="Egypt Destination"
                 width={400}
-                height={300}
+                height={400}
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 priority={i < 2}
               />
@@ -90,9 +114,10 @@ export default function EndlessWonder() {
       </div>
 
       {/* BOTTOM ROW (LEFT → RIGHT) */}
-      <div className="mx-auto mt-12 max-w-[95vw] overflow-hidden">
+     <div className="mx-auto mt-5 lg:mt-6s max-w-[95vw] overflow-hidden">
+
         <motion.div
-          className="flex gap-4 sm:gap-8 w-max"
+          className="flex gap-4 sm:gap-4 lg:-3 w-max"
           animate={{ x: ["-50%", "0%"] }}
           transition={{
             repeat: Infinity,
@@ -103,8 +128,19 @@ export default function EndlessWonder() {
           {[...bottomImages, ...bottomImages].map((img, i) => (
             <div
               key={`bottom-${i}`}
-              className="group w-[calc(33.333vw-16px)] sm:w-[320px] h-[180px] sm:h-[220px] rounded-[32px] overflow-hidden shadow-xl"
-            >
+               className="
+                group
+                w-[calc(30vw-12px)]
+                sm:w-[280px]
+                lg:w-[200px]      /* narrower */
+                h-[160px]
+                sm:h-[200px]
+                lg:h-[280px]      /* shorter */
+                rounded-[28px]
+                overflow-hidden
+                shadow-lg lg:shadow-md
+              "
+                          >
               <Image
                 src={`/images/trending/${img}`}
                 alt="Egypt Destination"
@@ -117,13 +153,13 @@ export default function EndlessWonder() {
         </motion.div>
 
         {/* MOBILE MAP IMAGE */}
-        <div className="mt-8 w-80 h-80 overflow-hidden shadow-xl mx-auto block sm:hidden">
+        <div className="mt-7 w-90 h-100 overflow-hidden shadow-xl mx-auto block sm:hidden">
           <Image
             src={`/images/trending/map.png`}
             alt="Egypt Destination"
             width={400}
             height={300}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            className="h-full w-full object-cover mt-5 transition-transform duration-700 ease-out group-hover:scale-110"
           />
         </div>
       </div>

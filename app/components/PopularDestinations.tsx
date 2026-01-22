@@ -78,15 +78,15 @@ export default function PopularDestinationsSlider() {
         {tours.map((_, idx) => (
           <button
             key={idx}
-            onClick={() => swiperRef.current?.slideToLoop(idx)} // slideToLoop ensures loop works correctly
+            onClick={() => swiperRef.current?.slideToLoop(idx)}
             className={`h-3 w-3 -mt-2 rounded-full transition ${
-              idx === currentIndex ? 'bg-[#d6b36b]' : 'border border-[#2a4b4b]'
+              idx === currentIndex ? 'bg-[#0a7bbe]' : 'border border-[#2a4b4b]'
             }`}
           />
         ))}
       </div>
 
-<div className="mt-5 sm:hidden mt-6 w-full flex justify-center">
+<div className="mt-9 sm:hidden mt-6 w-full flex justify-center">
   <video
     src="/images/tours/video1.webm"
     autoPlay

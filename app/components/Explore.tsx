@@ -86,15 +86,15 @@ export default function PopularDestinationsSlider() {
           <button
             className="
               relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full
-              border border-[#E6B56C] bg-[#E6B56C]
+              border border-[#0A7BBE] bg-[#0A7BBE]
               text-xs sm:text-base font-semibold
               group
             "
           >
             <span
               className="
-                absolute inset-0 bg-[#0A7BBE]
-                translate-x-[100%]
+                absolute inset-0 bg-[#075E94]
+                -translate-x-[100%]
                 group-hover:translate-x-0
                 transition-transform duration-500 ease-out
               "
