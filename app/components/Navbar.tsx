@@ -53,7 +53,14 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="fixed top-0 z-50 w-full bg-transparent"
       >
-        <div className="mx-auto flex lg:w-300 max-w-7xl items-center lg:-mt-10 justify-between px-6 py-4">
+       <div className="
+  mx-auto flex max-w-7xl items-center justify-between
+  px-6
+  -mt-9 pb-3
+  md:py-4
+  lg:-mt-10
+">
+
           {/* LOGO */}
           <Link href="/" className="flex items-center">
             <Image
