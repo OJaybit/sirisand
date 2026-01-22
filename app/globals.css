@@ -4,6 +4,45 @@
   --background: #ffffff;
   --foreground:#ffffff;
 }
+.shine-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.group:hover .shine-wrapper {
+  opacity: 1;
+}
+
+.shine {
+  position: absolute;
+  top: -40%;
+  left: 0;
+  width: 100%;
+  height: 25%; /* THICK LINE */
+  background: rgba(220, 220, 220, 0.95); /* white-gray solid */
+  animation: none;
+}
+
+.group:hover .shine {
+  animation: shine 1s ease-in-out forwards;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(30%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
 
 @theme inline {
   --color-background: var(--background);

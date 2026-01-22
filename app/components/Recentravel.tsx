@@ -38,22 +38,62 @@ function ImageCard({
       className="group relative cursor-pointer overflow-hidden rounded-[32px] shadow-lg"
       onClick={() => onOpen(index)}
     >
-      <Image
-        src={src}
-        alt="Travel moment"
-        width={420}
-        height={520}
-        className="w-full object-cover"
-      />
-      {/* ZOOM ICON OVERLAY */}
-      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition group-hover:opacity-100">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-white">
-          <div className="relative h-4 w-4">
-            <span className="absolute inset-x-0 top-1/2 h-[2px] bg-white" />
-            <span className="absolute inset-y-0 left-1/2 w-[2px] bg-white" />
+      <div className="relative overflow-hidden">
+        {/* IMAGE */}
+        <Image
+          src={src}
+          alt="Travel moment"
+          width={420}
+          height={520}
+          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* WHITE SHINE (top -> bottom) */}
+       {/* WHITE SHINE (top -> bottom) */}
+<div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+  <div className="absolute top-0 left-0 h-full w-full overflow-hidden">
+    <div className="absolute top-[-60%] left-0 h-[60%] w-full bg-white/20 blur-2xl animate-shine" />
+  </div>
+</div>
+
+
+        {/* ZOOM ICON OVERLAY */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition group-hover:opacity-100">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white">
+            {/* zoom icon */}
+            <div className="relative h-4 w-4">
+              <span className="absolute inset-x-0 top-1/2 h-[2px] bg-white" />
+              <span className="absolute inset-y-0 left-1/2 w-[2px] bg-white" />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* SHINE ANIMATION CSS */}
+      <style jsx>{`
+        .shine {
+          position: absolute;
+          top: -60%;
+          left: 0;
+          width: 100%;
+          height: 60%;
+          background: rgba(255, 255, 255, 0.22);
+          filter: blur(18px);
+          animation: shineMove 1.1s ease-in-out forwards;
+        }
+
+        @keyframes shineMove {
+          0% {
+            transform: translateY(-100%);
+          }
+          50% {
+            transform: translateY(20%);
+          }
+          100% {
+            transform: translateY(110%);
+          }
+        }
+      `}</style>
     </motion.div>
   );
 }
@@ -71,7 +111,6 @@ export default function RecentTravelMoments() {
 
   return (
     <>
-    
       {/* GALLERY */}
       <section className="bg-white py-28">
         <div className="mx-auto max-w-7xl px-4">
@@ -86,8 +125,8 @@ export default function RecentTravelMoments() {
           </div>
 
           {/* DESKTOP GRID */}
-          <div className="hidden lg:grid grid-cols-5 gap-10">
-            <div className="translate-y-32">
+          <div className="hidden lg:grid grid-cols-5 gap-5 max-w-[920px] mx-auto">
+            <div className="translate-y-32 mt-5">
               <ImageCard
                 src={images[0]}
                 index={0}
@@ -97,7 +136,7 @@ export default function RecentTravelMoments() {
                 }}
               />
             </div>
-            <div className="flex flex-col gap-10 translate-y-12">
+            <div className="flex flex-col gap-4 translate-y-12">
               <ImageCard
                 src={images[1]}
                 index={1}
@@ -115,7 +154,7 @@ export default function RecentTravelMoments() {
                 }}
               />
             </div>
-            <div className="translate-y-32">
+            <div className="translate-y-32 mt-5">
               <ImageCard
                 src={images[3]}
                 index={3}
@@ -125,7 +164,7 @@ export default function RecentTravelMoments() {
                 }}
               />
             </div>
-            <div className="flex flex-col gap-10 translate-y-12">
+            <div className="flex flex-col gap-4 translate-y-12">
               <ImageCard
                 src={images[4]}
                 index={4}
@@ -143,7 +182,7 @@ export default function RecentTravelMoments() {
                 }}
               />
             </div>
-            <div className="translate-y-32">
+            <div className="translate-y-32 mt-5">
               <ImageCard
                 src={images[6]}
                 index={6}

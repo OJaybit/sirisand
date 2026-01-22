@@ -43,7 +43,7 @@ const item: Variants = {
 
 export default function BackgroundAnimationPage() {
   return (
-    <section className="relative flex items-center justify-center h-[510px] lg:h-120 bg-white">
+    <section className="relative lg:mt-5 mt-10 flex items-center justify-center h-[510px] lg:h-120 bg-white">
       {/* Rounded background container */}
       <div className="relative w-full h-full rounded-t-[100px] overflow-hidden bg-[#faf6ef]">
 
