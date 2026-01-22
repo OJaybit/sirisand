@@ -153,9 +153,9 @@ export default function EndlessWonder() {
         </motion.div>
 
         {/* MOBILE MAP IMAGE */}
-        <div className="mt-7 w-90 h-100 overflow-hidden shadow-xl mx-auto block sm:hidden">
+        <div className="mt-5 w-90 h-124 overflow-hidden shadow-xl mx-auto block sm:hidden">
           <Image
-            src={`/images/trending/map.png`}
+            src={`/images/trending/map.webp`}
             alt="Egypt Destination"
             width={400}
             height={300}

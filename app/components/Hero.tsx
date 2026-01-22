@@ -38,7 +38,7 @@ export default function Hero() {
       <video
         suppressHydrationWarning
         className="absolute inset-0 h-full w-full object-cover scale-105"
-        src="/hero-video.mp4"
+        src="/hero-video.webm"
         autoPlay
         muted
         loop

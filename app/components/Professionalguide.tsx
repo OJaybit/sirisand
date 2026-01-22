@@ -1,7 +1,13 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, type Variants } from 'framer-motion';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from 'framer-motion';
 import { pacifico } from '@/app/fonts';
 
 /* ================= ANIMATION VARIANTS ================= */
@@ -25,8 +31,20 @@ const item: Variants = {
 };
 
 export default function TripSection() {
+  /* ================= SCROLL ZOOM VIDEO ================= */
+  const videoRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: videoRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Zoom strength: adjust 1.15 → 1.4 if you want stronger
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+
   return (
     <>
+      {/* ================= MAIN SECTION ================= */}
       <section className="w-full px-6 mt-7 lg:px-20 py-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -56,17 +74,14 @@ export default function TripSection() {
               variants={item}
               className="text-gray-600 leading-relaxed -mt-5"
             >
-              Explore the beauty of Egypt with unforgettable group tours to amazing
-              destinations like Siwa Oasis, the White Desert, Luxor, Aswan and
-              Fayoum. Let’s go together and create memories that will stay with you
-              forever.
+              Explore the beauty of Egypt with unforgettable group tours to
+              amazing destinations like Siwa Oasis, the White Desert, Luxor,
+              Aswan and Fayoum. Let’s go together and create memories that will
+              stay with you forever.
             </motion.p>
 
-            <motion.div
-              variants={item}
-              className="flex flex-col gap-8"
-            >
-              <motion.div variants={item} className="flex gap-4 items-start group">
+            <motion.div variants={item} className="flex flex-col gap-8">
+              <motion.div className="flex gap-4 items-start group">
                 <div className="w-12 h-12 min-w-[48px] rounded-full bg-[#E9D09A] group-hover:bg-[#075E94] transition-colors duration-300" />
                 <div>
                   <h3 className="font-semibold text-lg text-[#0A7BBE]">
@@ -79,42 +94,38 @@ export default function TripSection() {
                 </div>
               </motion.div>
 
-              <motion.div variants={item} className="flex gap-4 items-start group">
+              <motion.div className="flex gap-4 items-start group">
                 <div className="w-12 h-12 min-w-[48px] rounded-full bg-[#E9D09A] group-hover:bg-[#075E94] transition-colors duration-300" />
                 <div>
                   <h3 className="font-semibold text-lg text-[#0A7BBE]">
                     Professional Guide
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Discover Egypt with a professional guide who makes every trip
-                    easier, more enjoyable and full of cultural local insights.
+                    Discover Egypt with a professional guide who makes every
+                    trip easier, more enjoyable and full of cultural local
+                    insights.
                   </p>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Learn More BUTTON */}
+            {/* ================= BUTTON ================= */}
             <motion.button
               variants={item}
               className="
-                relative overflow-hidden w-fit px-8 py-4 rounded-full bg-[#0A7BBE]
-                border border-[#0A7BBE]
-                text-white font-semibold
-                group
+                relative overflow-hidden w-fit px-8 py-4 rounded-full
+                bg-[#0A7BBE] border border-[#0A7BBE]
+                text-white font-semibold group
               "
             >
-              {/* background slide */}
               <span
                 className="
                   absolute inset-0 bg-[#075E94]
-                  translate-x-[-100%]
-                  group-hover:translate-x-0
+                  translate-x-[-100%] group-hover:translate-x-0
                   transition-transform duration-500 ease-out
                 "
               />
-
-              {/* content */}
-              <span className="relative z-10 flex items-center gap-3 transition-colors duration-300">
+              <span className="relative z-10 flex items-center gap-3">
                 Learn More
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
                   →
@@ -131,40 +142,31 @@ export default function TripSection() {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1 relative lg:-mt-20 -mt-10 w-full h-[320px] sm:h-[380px] lg:h-[520px]"
           >
-            {/* Large Image with diagonal shape */}
+            {/* Large Image */}
             <div
               className="absolute left-0 top-0 w-[70%] h-full overflow-hidden"
               style={{
                 borderTopLeftRadius: '120px',
                 borderBottomRightRadius: '120px',
-                borderTopRightRadius: '0px',
-                borderBottomLeftRadius: '0px',
               }}
             >
               <Image
                 src="/group.jpg"
                 alt="Tour Group"
                 fill
-                sizes="(max-width: 768px) 90vw, 40vw"
                 className="object-cover"
               />
             </div>
 
-            {/* SMALL FLOATING IMAGE */}
+            {/* Floating Image */}
             <div
               className="
                 absolute right-0 bottom-20
                 w-[38%] h-[34%]
-                sm:w-[36%] sm:h-[32%]
-                lg:w-[45%] lg:h-[40%]
-                overflow-hidden
-                border-[5px] border-white
-                shadow-2xl
+                overflow-hidden border-[5px] border-white shadow-2xl
               "
               style={{
                 borderTopLeftRadius: '200px',
-                borderTopRightRadius: '5px',
-                borderBottomLeftRadius: '5px',
                 borderBottomRightRadius: '200px',
               }}
             >
@@ -172,7 +174,6 @@ export default function TripSection() {
                 src="/sunset.jpg"
                 alt="Sunset Tour"
                 fill
-                sizes="(max-width: 768px) 60vw, 20vw"
                 className="object-cover"
               />
             </div>
@@ -180,15 +181,19 @@ export default function TripSection() {
         </div>
       </section>
 
-      {/* MOBILE VIDEO ONLY */}
-      <div className="block md:hidden px-6 lg:px-20">
-        <video
-          src="/images/tours/video1.webm"
+      {/* ================= MOBILE VIDEO (ZOOM ON SCROLL) ================= */}
+      <div
+        ref={videoRef}
+        className="block md:hidden px-6 mt-4 lg:px-20 overflow-hidden rounded-xl"
+      >
+        <motion.video
+          src="/images/tours/video2.mp4"
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-170 rounded-xl shadow-lg object-cover"
+          style={{ scale }}
+          className="w-full h-170 object-cover"
         />
       </div>
     </>
