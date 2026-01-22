@@ -183,19 +183,20 @@ export default function TripSection() {
 
       {/* ================= MOBILE VIDEO (ZOOM ON SCROLL) ================= */}
       <div
-        ref={videoRef}
-        className="block md:hidden px-6 mt-4 lg:px-20 overflow-hidden rounded-xl"
-      >
-        <motion.video
-          src="/images/tours/video2.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ scale }}
-          className="w-full h-170 object-cover"
-        />
-      </div>
+  ref={videoRef}
+  className="block md:hidden px-6 mt-4 lg:px-20 overflow-hidden"
+>
+  <motion.video
+    src="/images/tours/video1.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    style={{ scale }}
+    className="w-full h-170 object-cover rounded-[60px]"
+  />
+</div>
+
     </>
   );
 }

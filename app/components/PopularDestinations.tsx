@@ -108,23 +108,20 @@ export default function PopularDestinationsSlider() {
       </div>
 
       {/* ================= MOBILE VIDEO – ZOOM ON SCROLL ================= */}
-  <div ref={videoRef} className="block md:hidden mt-10 overflow-hidden">
-  <div className="px-6 lg:px-40 flex justify-center">
-    <motion.video
-      src="/images/tours/video1.mp4"
-      autoPlay
-      muted
-      loop
-      playsInline
-      style={{ scale }}
-      className="
-        w-full max-w-[1200px]
-        h-170
-        rounded-xl
-        object-cover
-      "
-    />
-  </div>
+    <div
+  ref={videoRef}
+  className="block md:hidden px-6 mt-4 lg:px-20 w-screen flex justify-center -ml-6 items-center mt-15 overflow-hidden"
+>
+  <motion.video
+    src="/images/tours/video2.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    style={{ scale }}
+    className="w-full h-170 object-cover rounded-b-[90px]
+     rounded-t-[70px]"
+  />
 </div>
 
 
