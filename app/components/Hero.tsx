@@ -2,26 +2,25 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { pacifico } from "@/app/fonts";
 
 /* ---------------- SLIDES DATA ---------------- */
-
 const slides = [
   {
-    title: "Discover Timeless Egyptian Adventures",
-    text: "Explore deserts, oases, and ancient wonders with expert local guides.",
+    title: "Discover the Timeless Magic of Egyptian",
+    text: "Explore Egypt's hidden wonders",
   },
   {
-    title: "Journey Through The Sahara",
-    text: "Experience the White Desert, Black Desert, and the magic of Siwa Oasis.",
+    title: "Discover the Timeless Magic of Egyptian",
+    text: "Journey Through Ancient Egypt",
   },
   {
-    title: "Travel With Siri Sand TOur",
-    text: "Authentic experiences led by people who truly live the land.",
+    title: "Discover the Timeless Magic of Egyptian",
+    text: "Discover timeless Egyptian Beauty",
   },
 ];
 
 /* ---------------- HERO ---------------- */
-
 export default function Hero() {
   const [current, setCurrent] = useState(0);
 
@@ -34,11 +33,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative z-0 h-screen w-full overflow-hidden">
-      {/* 🎥 VIDEO BACKGROUND */}
+    <section className="relative lg:h-200 h-screen w-full overflow-hidden">
+      {/* VIDEO BACKGROUND */}
       <video
         suppressHydrationWarning
-        className="absolute inset-0 h-[700px] w-full object-cover scale-105"
+        className="absolute inset-0 h-full w-full object-cover scale-105"
         src="/hero-video.mp4"
         autoPlay
         muted
@@ -49,8 +48,8 @@ export default function Hero() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
 
-      {/* TEXT LAYER */}
-      <div className="relative z-10 flex h-full items-center mt-10 lg:mt-1 justify-start px-6 lg:px-20">
+      {/* CONTENT */}
+      <div className="relative z-10 flex h-full items-center lg:-mt-33 px-6 lg:px-20">
         <AnimatePresence mode="wait">
           <TextBlock key={current} slide={slides[current]} />
         </AnimatePresence>
@@ -60,88 +59,106 @@ export default function Hero() {
 }
 
 /* ---------------- TEXT BLOCK ---------------- */
-
 function TextBlock({ slide }: { slide: any }) {
   return (
     <motion.div
-      className="max-w-4xl text-left text-WHITE lg mt-15"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.3, // stagger title, text, and buttons
+          },
+        },
+      }}
+      className="
+        w-full
+        flex
+        flex-col
+        items-center
+        text-center
+        lg:items-start
+        lg:text-left
+        lg:mt-30
+      "
     >
-      {/* Heading */}
+      {/* TITLE */}
       <motion.h1
-        initial={{ opacity: 0, y: 35 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-        className="text-2xl sm:text-3xl md:text-6xl font-bold leading-tight"
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className={`
+          ${pacifico.className}
+          text-base sm:text-lg md:text-xl lg:text-2xl
+          text-white/90
+        `}
       >
         {slide.title}
       </motion.h1>
 
-      {/* Sub Text */}
+      {/* TEXT */}
       <motion.p
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-        className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-white max-w-2xl"
+        variants={{
+          hidden: { opacity: 0, y: 16 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="
+          mt-3
+          text-3xl sm:text-4xl md:text-5xl lg:text-7xl
+          font-semibold leading-tight text-white
+          max-w-full lg:max-w-[60vw]
+        "
       >
         {slide.text}
       </motion.p>
 
       {/* BUTTONS */}
-      <div className="mt-6 sm:mt-8 flex flex-wrap gap-4 sm:gap-6">
-        {/* CTA 1 */}
-        <button
-          className="
-            relative overflow-hidden w-fit px-8 py-4 rounded-full
-            bg-[#0A7BBE] border border-[#2a4b4b]
-            text-white font-semibold
-            group
-          "
+      <motion.div
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.2 }, // stagger buttons individually
+          },
+        }}
+        className="
+          mt-8
+          flex flex-col items-center gap-4
+          sm:flex-row lg:justify-start
+        "
+      >
+        <motion.button
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative overflow-hidden px-8 py-4 rounded-full bg-[#0A7BBE] h-16 text-white font-semibold group"
         >
-          <span
-            className="
-              absolute inset-0 bg-[#d6b36b]
-              translate-x-[-100%]
-              group-hover:translate-x-0
-              transition-transform duration-500 ease-out
-            "
-          />
-          <span className="relative z-10 flex items-center gap-3">
-            Explore Tours
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
+          <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+          <span className="relative z-10 flex items-center gap-2">
+            Explore Tours →
           </span>
-        </button>
+        </motion.button>
 
-        {/* CTA 2 */}
-        <button
-          className="
-            relative overflow-hidden w-fit px-8 py-4 rounded-full
-            border border-white
-            text-white font-semibold
-            group
-          "
+        <motion.button
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative overflow-hidden px-8 py-4 rounded-full border border-white text-white font-semibold group"
         >
-          <span
-            className="
-              absolute inset-0 bg-[#0A7BBE]
-              translate-x-[-100%]
-              group-hover:translate-x-0
-              transition-transform duration-500 ease-out
-            "
-          />
-          <span className="relative z-10 flex items-center gap-3">
-            Contact us
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
+          <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+          <span className="relative z-10 flex items-center gap-2">
+            Contact Us →
           </span>
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     </motion.div>
   );
 }
