@@ -27,15 +27,23 @@ export default function PopularDestinationsSlider() {
   const swiperRef = useRef<any>(null);
 
   /* ================= SCROLL ZOOM VIDEO ================= */
+  // We attach this ref to the container <div> so framer-motion can track its position
   const videoRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: videoRef,
+    // 'start end': Animation starts when top of element hits bottom of viewport
+    // 'end start': Animation ends when bottom of element hits top of viewport
     offset: ['start end', 'end start'],
   });
 
-  // Zoom strength
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  // 1. Container Width: 
+  // '90%' start fits nicely in the container.
+  // '110vw' end ensures it definitely zooms WIDER than the screen (viewport).
+  const containerWidth = useTransform(scrollYProgress, [0, 1], ['90%', '110vw']);
+
+  // 2. Internal Video Scale: Keeps the parallax zoom
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
 
   return (
     <section className="px-6 lg:px-20 py-2 -mt-40 relative">
@@ -108,29 +116,34 @@ export default function PopularDestinationsSlider() {
       </div>
 
       {/* ================= MOBILE VIDEO – ZOOM ON SCROLL ================= */}
- <div
-  ref={videoRef}
-  className="
-    block md:hidden
-    px-6 mt-15
-    w-screen -ml-6 rounded-3xl border border-white
-    flex justify-center items-center
-    overflow-hidden
-  "
->
-  <motion.video
-    src="/images/tours/video2.mp4"
-    autoPlay
-    muted
-    loop
-    playsInline
-    style={{ scale }}
-    className="w-screen h-230 rounded-4xl border border-gray-200 object-cover "
-  />
-</div>
-
-
-
+      <motion.div
+        ref={videoRef}
+        style={{ 
+          width: containerWidth, 
+          x: "-50%", // THE FIX: This keeps the element centered even when it gets wider than the screen
+        }}
+        className="
+          block md:hidden
+          mt-16
+          left-1/2              /* Anchor the element to the center of the screen */
+          relative
+          h-[750px]
+          rounded-[32px]
+          overflow-hidden
+          border border-gray-200
+          shadow-lg
+        "
+      >
+        <motion.video
+          src="/images/tours/video2.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ scale: videoScale }}
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
     </section>
   );

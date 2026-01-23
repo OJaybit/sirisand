@@ -39,8 +39,11 @@ export default function TripSection() {
     offset: ['start end', 'end start'],
   });
 
-  // Zoom strength: adjust 1.15 → 1.4 if you want stronger
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  // 1. Container Width: Expands from 90% to 110vw (Wider than screen)
+  const containerWidth = useTransform(scrollYProgress, [0, 1], ['90%', '110vw']);
+
+  // 2. Internal Video Scale: Parallax zoom effect
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
 
   return (
     <>
@@ -182,27 +185,34 @@ export default function TripSection() {
       </section>
 
       {/* ================= MOBILE VIDEO (ZOOM ON SCROLL) ================= */}
- <div
-  ref={videoRef}
-  className="
-    block md:hidden
-    px-6 mt-15
-    w-screen
-    rounded-3xl border border-white
-    flex justify-center items-center
-    overflow-hidden
-  "
->
-  <motion.video
-    src="/images/tours/video1.mp4"
-    autoPlay
-    muted
-    loop
-    playsInline
-    style={{ scale }}
-    className="w-full h-230 object-cover rounded-4xl border border-gray-200"
-  />
-</div>
+      <motion.div
+        ref={videoRef}
+        style={{ 
+          width: containerWidth, 
+          x: "-50%", // Keeps the element centered even when wider than screen
+        }}
+        className="
+          block md:hidden
+          mt-16
+          left-1/2              /* Anchor to center */
+          relative
+          h-[750px]             /* Fixed height */
+          rounded-[32px]
+          overflow-hidden
+          border border-gray-200
+          shadow-lg
+        "
+      >
+        <motion.video
+          src="/images/tours/video1.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ scale: videoScale }} // Internal zoom
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
     </>
   );
