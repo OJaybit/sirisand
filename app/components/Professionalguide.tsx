@@ -190,8 +190,6 @@ export default function TripSection() {
     w-screen
     flex justify-center items-center
     overflow-hidden
-    rounded-l-[80px]   /* left edge rounded */
-    rounded-r-[80px]   /* right edge rounded */
   "
 >
   <motion.video
@@ -201,7 +199,7 @@ export default function TripSection() {
     loop
     playsInline
     style={{ scale }}
-    className="w-full h-250 object-cover rounded-l-[70px] rounded-r-[80px]"
+    className="w-full h-230 object-cover"
   />
 </div>
 
