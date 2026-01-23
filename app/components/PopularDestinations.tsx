@@ -108,9 +108,16 @@ export default function PopularDestinationsSlider() {
       </div>
 
       {/* ================= MOBILE VIDEO – ZOOM ON SCROLL ================= */}
-    <div
+  <div
   ref={videoRef}
-  className="block md:hidden px-6 mt-4 lg:px-20 w-screen flex justify-center -ml-6 items-center mt-15 overflow-hidden"
+  className="
+    block md:hidden
+    px-6 mt-15
+    w-screen -ml-6
+    flex justify-center items-center
+    overflow-hidden
+    rounded-t-[100px] rounded-b-[90px]
+  "
 >
   <motion.video
     src="/images/tours/video2.mp4"
@@ -119,8 +126,7 @@ export default function PopularDestinationsSlider() {
     loop
     playsInline
     style={{ scale }}
-    className="w-full h-170 object-cover rounded-b-[90px]
-     rounded-t-[70px]"
+    className="w-full h-170 object-cover"
   />
 </div>
 
