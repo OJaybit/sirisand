@@ -55,8 +55,8 @@ export default function Navbar() {
       >
        <div className="
   mx-auto flex max-w-7xl items-center justify-between
-  px-6 -ml-5 lg:ml-5
-  -mt-18 pb-3 lg:-mt-20
+  px-6 -ml-13 lg:ml-5
+  -mt-22 pb-3 lg:-mt-27
   md:py-4
   lg:-mt-10
 ">
