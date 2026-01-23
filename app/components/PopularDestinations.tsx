@@ -113,7 +113,7 @@ export default function PopularDestinationsSlider() {
   className="
     block md:hidden
     px-6 mt-15
-    w-screen -ml-6
+    w-screen -ml-6 rounded-3xl border border-white
     flex justify-center items-center
     overflow-hidden
   "
@@ -125,7 +125,7 @@ export default function PopularDestinationsSlider() {
     loop
     playsInline
     style={{ scale }}
-    className="w-full h-230 object-cover "
+    className="w-screen h-230 rounded-4xl border border-gray-200 object-cover "
   />
 </div>
 

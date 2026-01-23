@@ -188,6 +188,7 @@ export default function TripSection() {
     block md:hidden
     px-6 mt-15
     w-screen
+    rounded-3xl border border-white
     flex justify-center items-center
     overflow-hidden
   "
@@ -199,7 +200,7 @@ export default function TripSection() {
     loop
     playsInline
     style={{ scale }}
-    className="w-full h-230 object-cover"
+    className="w-full h-230 object-cover rounded-4xl border border-gray-200"
   />
 </div>
 
