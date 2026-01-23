@@ -157,7 +157,7 @@ export default function PopularDestinationsSlider() {
               {/* Book button fully moved to the left outside card */}
               <div className="absolute left-4 bottom-6">
                 <button className="min-h-[44px] px-5 sm:px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center text-sm sm:text-base">
-                  Book Now →
+                  Read More →
                 </button>
               </div>
 
@@ -169,7 +169,7 @@ export default function PopularDestinationsSlider() {
 
 {/* ================= DOTS ================= */}
 <div className="relative z-20 mt-6 flex justify-center gap-3">
-  {tours.slice(0, 7) .map((_, idx) => (
+  {tours.slice(0, 11) .map((_, idx) => (
     <button
       key={idx}
       onClick={() => swiperRef.current?.slideToLoop(idx)}
