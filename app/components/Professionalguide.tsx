@@ -182,25 +182,26 @@ export default function TripSection() {
       </section>
 
       {/* ================= MOBILE VIDEO (ZOOM ON SCROLL) ================= */}
-<div
+ <div
   ref={videoRef}
   className="
     block md:hidden
-    px-6 mt-4
-    w-full
+    px-6 mt-15
+    w-screen
     flex justify-center items-center
     overflow-hidden
-    rounded-t-[100px] rounded-b-[90px]
+    rounded-l-[80px]   /* left edge rounded */
+    rounded-r-[80px]   /* right edge rounded */
   "
 >
   <motion.video
-    src="/images/tours/video2.mp4"
+    src="/images/tours/video1.mp4"
     autoPlay
     muted
     loop
     playsInline
     style={{ scale }}
-    className="w-full h-170 object-cover"
+    className="w-full h-250 object-cover rounded-l-[70px] rounded-r-[80px]"
   />
 </div>
 
