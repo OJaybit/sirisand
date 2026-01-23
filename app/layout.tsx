@@ -1,6 +1,8 @@
 import './globals.css'
 import Navbar from './components/Navbar'
 import { Pacifico } from 'next/font/google'
+import WhatsAppButton from "./components/WhatsAppButton";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 export default function RootLayout({
@@ -14,7 +16,8 @@ export default function RootLayout({
         
         {/* HEADER */}
         <Navbar />
-
+ <WhatsAppButton />
+        <ScrollToTop />
         {/* PAGE CONTENT */}
         <main className="flex-1">
           {children}

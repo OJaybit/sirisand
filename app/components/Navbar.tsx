@@ -55,8 +55,8 @@ export default function Navbar() {
       >
        <div className="
   mx-auto flex max-w-7xl items-center justify-between
-  px-6
-  -mt-9 pb-3
+  px-6 -ml-5 lg:ml-5
+  -mt-18 pb-3 lg:-mt-20
   md:py-4
   lg:-mt-10
 ">
@@ -66,7 +66,7 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="Siri Sand Tour Logo"
-              width={150}
+              width={290}
               height={100}
               priority
             />
@@ -141,11 +141,12 @@ export default function Navbar() {
             </button>
 
             {/* LOGO IN MOBILE MENU */}
-            <div className="flex justify-start pl-0 -ml-5 -mt-9">
+            <div className="flex justify-start pl-0 -ml-5 
+            -mt-9">
               <Image
                 src="/logo.png"
                 alt="Siri Sand Tour Logo"
-                width={170}
+                width={180}
                 height={80}
               />
             </div>

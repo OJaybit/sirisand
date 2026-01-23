@@ -43,6 +43,166 @@
   }
 }
 
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+
+  animation:
+    whatsapp-bounce 2.5s ease-in-out infinite,
+    whatsapp-glow 1.8s infinite;
+}
+
+/* Smooth bounce */
+@keyframes whatsapp-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Soft glowing pulse */
+@keyframes whatsapp-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+
+
+
+/* Scroll Progress Button */
+.scroll-progress {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: conic-gradient(#0a7bbe 0%, #e6e6e6 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-progress.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-progress:hover {
+  transform: translateY(-4px);
+}
+
+/* Inner circle */
+.scroll-icon {
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a7bbe;
+}
+
+
+/* Testimonials */
+.testimonials-section {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.testimonials-header .subtitle {
+  font-family: cursive;
+  color: #0a7bbe;
+  font-size: 18px;
+}
+
+.testimonials-header h2 {
+  font-size: 42px;
+  color: #0f3e4a;
+}
+
+/* Slider wrapper */
+.testimonials-slider {
+  position: relative;
+  padding: 0 60px;
+}
+
+
+/* Navigation buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn.prev {
+  left: 0;
+}
+
+.nav-btn.next {
+  right: 0;
+}
+
+.nav-btn:hover {
+  background: #0a7bbe;
+  color: #fff;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+  .testimonials-slider {
+    padding: 0 20px;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+}
+
+
 
 @theme inline {
   --color-background: var(--background);

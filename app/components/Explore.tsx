@@ -166,6 +166,24 @@ export default function PopularDestinationsSlider() {
         ))}
       </Swiper>
 
+
+{/* ================= DOTS ================= */}
+<div className="relative z-20 mt-6 flex justify-center gap-3">
+  {tours.slice(0, 7) .map((_, idx) => (
+    <button
+      key={idx}
+      onClick={() => swiperRef.current?.slideToLoop(idx)}
+      className={`
+        h-4 w-4 rounded-full border-2 transition-all duration-300
+        ${idx === currentIndex
+          ? 'bg-[#0a7bbe] border-[#0a7bbe]'  // Active dot: filled + border
+          : 'bg-transparent border-gray-400' // Inactive dot: border only
+        }
+      `}
+    />
+  ))}
+</div>
+
     </section>
   );
 }

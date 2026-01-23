@@ -10,7 +10,6 @@ const bgImages = [
   '/bg/bg3.png',
   '/bg/bg4.png',
   '/bg/bg5.png',
-  '/bg/bg6.png',
 ];
 
 // helper: get exactly 6 images per row
@@ -87,7 +86,7 @@ export default function BackgroundSection() {
       </section>
 
       {/* ================= MOBILE ONLY ================= */}
-      <section className="block lg:hidden bg-white mt-8 pb-5 overflow-hidden">
+      <section className="block  lg:hidden bg-white mt-8 pb-5 overflow-hidden">
         {/* MOVING IMAGES */}
         <div className="relative w-full overflow-hidden">
           <div className="flex gap-6 animate-marquee-slow">
@@ -98,7 +97,7 @@ export default function BackgroundSection() {
                 alt=""
                 width={64}
                 height={64}
-                className="flex-shrink-0 opacity-80"
+                className="flex-shrink-0 opacity-80 w-23"
               />
             ))}
           </div>

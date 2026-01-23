@@ -137,7 +137,10 @@ function TextBlock({ slide }: { slide: any }) {
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden px-8 py-4 rounded-full bg-[#0A7BBE] h-16 text-white font-semibold group"
+          className="relative overflow-hidden px-8 py-4 
+          h-17
+          w-50
+          rounded-full bg-[#0A7BBE] h-16 text-white font-semibold group"
         >
           <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
           <span className="relative z-10 flex items-center gap-2">
@@ -151,7 +154,10 @@ function TextBlock({ slide }: { slide: any }) {
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden px-8 py-4 rounded-full border border-white text-white font-semibold group"
+          className="relative overflow-hidden 
+           h-17
+          w-50
+          px-8 py-4 rounded-full border border-white text-white font-semibold group"
         >
           <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
           <span className="relative z-10 flex items-center gap-2">
