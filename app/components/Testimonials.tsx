@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
@@ -36,6 +36,20 @@ export default function Testimonials() {
   const nextLg = () => setIndex(prev => Math.min(prev + 1, maxIndexLg));
   const prevLg = () => setIndex(prev => Math.max(prev - 1, 0));
 
+  // AUTO SLIDE EFFECT
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(prev => {
+        if (window.innerWidth >= 1024) {
+          return prev >= maxIndexLg ? 0 : prev + 1;
+        }
+        return prev >= testimonials.length - 1 ? 0 : prev + 1;
+      });
+    }, 3000); // every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [maxIndexLg]);
+
   const Card = (item: Testimonial) => {
     const isOpen = openId === item.id;
     return (
@@ -45,8 +59,8 @@ export default function Testimonials() {
 
         <div className="flex gap-1 mb-3">
           {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className="w-4 h-4 rounded-full border-2 border-[#0a7bbe] flex items-center justify-center">
-              <span className="w-2 h-2 rounded-full bg-[#0a7bbe]" />
+            <span key={i} className="w-4 h-4 rounded-full border-2 border-[#00AA6C] flex items-center justify-center">
+              <span className="w-2 h-2 rounded-full bg-[#00AA6C]" />
             </span>
           ))}
         </div>
@@ -61,6 +75,11 @@ export default function Testimonials() {
     );
   };
 
+  // Mobile tracker settings
+  const trackerWidth = 120; // px total length of track
+  const indicatorWidth = 24; // px width of moving indicator
+  const maxTranslate = trackerWidth - indicatorWidth; // max movement
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6 lg:px-20">
@@ -73,8 +92,8 @@ export default function Testimonials() {
 
           <div className="flex justify-center gap-2 my-3">
             {Array.from({ length: 5 }).map((_, i) => (
-              <span key={i} className="w-5 h-5 rounded-full border-2 border-[#0a7bbe] flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full bg-[#0a7bbe]" />
+              <span key={i} className="w-5 h-5 rounded-full border-2 border-[#00AA6C] flex items-center justify-center">
+                <span className="w-3 h-3 rounded-full bg-[#00AA6C]" />
               </span>
             ))}
           </div>
@@ -91,7 +110,6 @@ export default function Testimonials() {
             />
           </div>
         </div>
-        {/* [#00AA6C] */}
 
         {/* DESKTOP */}
         <div className="hidden lg:block relative">
@@ -107,46 +125,42 @@ export default function Testimonials() {
           )}
         </div>
 
-       {/* MOBILE */}
-{/* MOBILE */}
-<div className="lg:hidden overflow-hidden relative">
-  <motion.div
-    className="flex"
-    drag="x"
-    dragConstraints={{ left: 0, right: 0 }}
-    dragElastic={0.3}
-    onDragEnd={(event, info) => {
-      const velocity = info.velocity.x;
-      const offset = info.offset.x;
+        {/* MOBILE */}
+        <div className="lg:hidden overflow-hidden relative">
+          <motion.div
+            className="flex"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.3}
+            onDragEnd={(event, info) => {
+              const velocity = info.velocity.x;
+              const offset = info.offset.x;
 
-      if (offset < -50 || velocity < -200) {
-        // swipe left
-        setIndex((prev) => Math.min(prev + 1, testimonials.length - 1));
-      } else if (offset > 50 || velocity > 200) {
-        // swipe right
-        setIndex((prev) => Math.max(prev - 1, 0));
-      }
-    }}
-    animate={{ x: `-${index * 100}%` }}
-    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-  >
-    {testimonials.map((t) => (
-      <div key={t.id} className="flex-shrink-0 w-full px-2">
-        {Card(t)}
-      </div>
-    ))}
-  </motion.div>
+              if (offset < -50 || velocity < -200) {
+                setIndex((prev) => Math.min(prev + 1, testimonials.length - 1));
+              } else if (offset > 50 || velocity > 200) {
+                setIndex((prev) => Math.max(prev - 1, 0));
+              }
+            }}
+            animate={{ x: `-${index * 100}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {testimonials.map((t) => (
+              <div key={t.id} className="flex-shrink-0 w-full px-2">
+                {Card(t)}
+              </div>
+            ))}
+          </motion.div>
 
-  {/* DOT PROGRESS */}
-  <div className="mt-4 relative h-1 w-full max-w-[180px] mx-auto bg-gray-200 rounded-full">
-    <div
-      className="absolute top-0 left-0 h-1 w-6 bg-black rounded-full transition-all"
-      style={{
-        transform: `translateX(${(index / (testimonials.length - 1)) * 100}%)`,
-      }}
-    />
-  </div>
-</div>
+          {/* MOBILE TRACKER */}
+          <div className="mt-4 relative h-1 w-full max-w-[120px] mx-auto bg-gray-200 rounded-full">
+            <motion.div
+              className="absolute top-0 left-0 h-1 w-6 bg-black rounded-full"
+              animate={{ x: (index / (testimonials.length - 1)) * maxTranslate }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+            />
+          </div>
+        </div>
 
       </div>
     </section>

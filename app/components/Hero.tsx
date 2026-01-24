@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { pacifico } from "@/app/fonts";
+import Link from "next/link";
+
 
 /* ---------------- SLIDES DATA ---------------- */
 const slides = [
@@ -117,54 +119,50 @@ function TextBlock({ slide }: { slide: any }) {
         {slide.text}
       </motion.p>
 
-      {/* BUTTONS */}
-      <motion.div
-        variants={{
-          hidden: {},
-          visible: {
-            transition: { staggerChildren: 0.2 }, // stagger buttons individually
-          },
-        }}
-        className="
-          mt-8
-          flex flex-col items-center gap-4
-          sm:flex-row lg:justify-start
-        "
-      >
-        <motion.button
-          variants={{
-            hidden: { opacity: 0, y: 16 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden px-8 py-4 
-          h-17
-          w-50
-          rounded-full bg-[#0A7BBE] h-16 text-white font-semibold group"
-        >
-          <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-          <span className="relative z-10 flex items-center gap-2">
-            Explore Tours →
-          </span>
-        </motion.button>
+     <motion.div
+  variants={{
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.2 },
+    },
+  }}
+  className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
+>
+  {/* EXPLORE TOURS */}
+  <Link href="/ourtrip">
+    <motion.button
+      variants={{
+        hidden: { opacity: 0, y: 16 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="relative overflow-hidden px-8 py-4 h-16 w-50 rounded-full bg-[#0A7BBE] text-white font-semibold group"
+    >
+      <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+      <span className="relative z-10 flex items-center gap-2">
+        Explore Tours →
+      </span>
+    </motion.button>
+  </Link>
 
-        <motion.button
-          variants={{
-            hidden: { opacity: 0, y: 16 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden 
-           h-17
-          w-50
-          px-8 py-4 rounded-full border border-white text-white font-semibold group"
-        >
-          <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-          <span className="relative z-10 flex items-center gap-2">
-            Contact Us →
-          </span>
-        </motion.button>
-      </motion.div>
+  {/* CONTACT US */}
+  <Link href="/contact">
+    <motion.button
+      variants={{
+        hidden: { opacity: 0, y: 16 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="relative overflow-hidden px-8 py-4 h-16 w-50 rounded-full border border-white text-white font-semibold group"
+    >
+      <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+      <span className="relative z-10 flex items-center gap-2">
+        Contact Us →
+      </span>
+    </motion.button>
+  </Link>
+</motion.div>
+
     </motion.div>
   );
 }

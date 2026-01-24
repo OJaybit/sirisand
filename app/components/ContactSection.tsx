@@ -17,7 +17,7 @@ export default function ContactSection() {
         {/* Contact Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Address */}
-          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#d6b36b] transition">
+          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#075E94] transition">
             <div className="w-20 h-20 rounded-full bg-[#0a7bbe] flex items-center justify-center text-white text-3xl hover:bg-[#d6b36b] transition">
               <HiOutlineLocationMarker />
             </div>
@@ -34,8 +34,8 @@ export default function ContactSection() {
           </div>
 
           {/* Phone */}
-          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#d6b36b] transition">
-            <div className="w-20 h-20 rounded-full bg-[#0a7bbe] flex items-center justify-center text-white text-3xl hover:bg-[#d6b36b] transition">
+          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#075E94] transition">
+            <div className="w-20 h-20 rounded-full bg-[#0a7bbe] flex items-center justify-center text-white text-3xl hover:bg-[#075E94] transition">
               <HiOutlinePhone />
             </div>
             <div>
@@ -49,8 +49,8 @@ export default function ContactSection() {
           </div>
 
           {/* Email */}
-          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#d6b36b] transition">
-            <div className="w-20 h-20 rounded-full bg-[#0a7bbe] flex items-center justify-center text-white text-3xl hover:bg-[#d6b36b] transition">
+          <div className="border rounded-lg p-8 flex items-center gap-6 hover:border-[#075E94] transition">
+            <div className="w-20 h-20 rounded-full bg-[#0a7bbe] flex items-center justify-center text-white text-3xl hover:bg-[#075E94] transition">
               <HiOutlineMail />
             </div>
             <div>

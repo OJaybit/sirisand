@@ -196,7 +196,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="group relative text-lg font-semibold text-[#0a7bee] px-3 hover:text-[#075E94]"
+      className="group relative text-lg font-semibold text-[#0a7bbe] px-3 hover:text-[#075E94]"
     >
       {children}
       <span className="absolute -bottom-1 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full" />
