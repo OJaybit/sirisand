@@ -45,8 +45,8 @@ export default function Testimonials() {
 
         <div className="flex gap-1 mb-3">
           {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className="w-4 h-4 rounded-full border-2 border-[#00AA6C] flex items-center justify-center">
-              <span className="w-2 h-2 rounded-full bg-[#00AA6C]" />
+            <span key={i} className="w-4 h-4 rounded-full border-2 border-[#0a7bbe] flex items-center justify-center">
+              <span className="w-2 h-2 rounded-full bg-[#0a7bbe]" />
             </span>
           ))}
         </div>
@@ -73,8 +73,8 @@ export default function Testimonials() {
 
           <div className="flex justify-center gap-2 my-3">
             {Array.from({ length: 5 }).map((_, i) => (
-              <span key={i} className="w-5 h-5 rounded-full border-2 border-[#00AA6C] flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full bg-[#00AA6C]" />
+              <span key={i} className="w-5 h-5 rounded-full border-2 border-[#0a7bbe] flex items-center justify-center">
+                <span className="w-3 h-3 rounded-full bg-[#0a7bbe]" />
               </span>
             ))}
           </div>
@@ -91,6 +91,7 @@ export default function Testimonials() {
             />
           </div>
         </div>
+        {/* [#00AA6C] */}
 
         {/* DESKTOP */}
         <div className="hidden lg:block relative">

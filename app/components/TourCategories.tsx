@@ -7,9 +7,9 @@ import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 
 const categories = [
-  { title: 'Desert Safari', listings: 3, image: '/images/categories/desert-safari.webp', link: '/tours/desert' },
-  { title: 'Historical', listings: 4, image: '/images/categories/historical.webp', link: '/tours/historical' },
-  { title: 'Holiday', listings: 2, image: '/images/categories/holiday.webp', link: '/tours/holiday' },
+  { title: 'Cairo', listings: 3, image: '/images/categories/desert-safari.webp', link: '/tours/desert' },
+  { title: 'Hurghada', listings: 4, image: '/images/categories/historical.webp', link: '/tours/historical' },
+  { title: 'Luxor', listings: 2, image: '/images/categories/holiday.webp', link: '/tours/holiday' },
 ];
 
 /* ================= ANIMATION VARIANTS ================= */
