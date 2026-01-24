@@ -1,15 +1,9 @@
-
-
-
-
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { code } from 'framer-motion/client';
 
 const destinations = [
   { id: 1, title: 'Luxor', image: 'luxor.webp', slug: 'luxor' },
@@ -36,7 +30,7 @@ export default function DestinationCarousel() {
       if (w < 640) {
         setIsMobile(true);
         setVisible(3);
-        setCardWidth(w * 0.94);       // near full width
+        setCardWidth(w * 0.94);
         setCardHeight(w * 1.25);
       } else if (w < 1024) {
         setIsMobile(false);
@@ -67,9 +61,8 @@ export default function DestinationCarousel() {
   const total = destinations.length;
   const center = Math.floor(visible / 2);
 
-  // 👇 Correct mobile spacing math (NO OVERLAP)
-  const peekAmount = cardWidth * 0.08;            // 8% peek
-  const mobileOffset = cardWidth - peekAmount;    // move almost full width
+  const peekAmount = cardWidth * 0.08;
+  const mobileOffset = cardWidth - peekAmount;
 
   return (
     <section className="relative -mt-30 lg:-mt-60 z-10 py-6 overflow-hidden">
@@ -86,6 +79,14 @@ export default function DestinationCarousel() {
             <motion.div
               key={dest.id}
               initial={false}
+              drag={isMobile ? 'x' : false}       // ✅ DRAG ENABLED
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.x < -50)
+                  setIndex((p) => (p + 1) % total);
+                if (info.offset.x > 50)
+                  setIndex((p) => (p - 1 + total) % total);
+              }}
               animate={{
                 x: isMobile ? offset * mobileOffset : offset * cardWidth,
                 y: isMobile ? distance * 12 : distance * 26,
@@ -104,7 +105,7 @@ export default function DestinationCarousel() {
                 stiffness: 140,
                 damping: 22,
               }}
-              className="absolute pointer-events-none"
+              className="absolute"
               style={{ zIndex: 10 - distance }}
             >
               <div style={{ width: cardWidth }}>
@@ -119,7 +120,7 @@ export default function DestinationCarousel() {
                   />
                 </div>
 
-                <div className="mt-4 text-center pointer-events-auto">
+                <div className="mt-4 text-center">
                   <Link href={`/destinations/${dest.slug}`}>
                     <h3 className="text-xl font-bold text-[#0A7BBE] hover:text-[#075E94] transition">
                       {dest.title}
@@ -133,15 +134,14 @@ export default function DestinationCarousel() {
         })}
       </div>
 
-      <div className="-mt-10 lg:-mt-5 flex justify-center gap-3">
+      {/* ===== Pagination ===== */}
+      <div className="-mt-10 lg:-mt-5 flex justify-center gap-3 z-50 relative">
         {destinations.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
             className={`h-3 w-3 rounded-full transition ${
-              i === index
-                ? 'bg-[#0A7BBE]'
-                : 'border border-[#2a4b4b]'
+              i === index ? 'bg-[#0A7BBE]' : 'border border-[#2a4b4b]'
             }`}
           />
         ))}
