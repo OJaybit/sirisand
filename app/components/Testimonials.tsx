@@ -45,7 +45,7 @@ export default function Testimonials() {
         }
         return prev >= testimonials.length - 1 ? 0 : prev + 1;
       });
-    }, 3000); // every 3 seconds
+    }, 7000); // every 7 seconds
 
     return () => clearInterval(interval);
   }, [maxIndexLg]);
