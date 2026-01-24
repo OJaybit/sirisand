@@ -7,6 +7,7 @@ import 'swiper/css';
 
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { pacifico } from '@/app/fonts';
 
 export default function PopularDestinationsSlider() {
   const tours = [
@@ -27,24 +28,29 @@ export default function PopularDestinationsSlider() {
   const swiperRef = useRef<any>(null);
 
   /* ================= SCROLL ZOOM VIDEO ================= */
-  // We attach this ref to the container <div> so framer-motion can track its position
   const videoRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: videoRef,
-    // 'start end': Animation starts when top of element hits bottom of viewport
-    // 'end start': Animation ends when bottom of element hits top of viewport
     offset: ['start end', 'end start'],
   });
 
-  
   const containerWidth = useTransform(scrollYProgress, [0, 1], ['90%', '110vw']);
-
-  // 2. Internal Video Scale: Keeps the parallax zoom
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
 
   return (
-    <section className="px-6 lg:px-20 py-2 -mt-40 relative">
+    <section className="px-6 lg:px-20 py-2 -mt-10 relative">
+
+      {/* ===== HEADER TEXT ===== */}
+      <div className="text-center mb-8">
+        <h2 className={`${pacifico.className} text-4xl text-[#0A7BBE]`}>
+          Our Tours
+        </h2>
+        <p className="text-6xl text-[#0A7BBE] mt-2">
+  Discover Our Best Tours
+</p>
+
+      </div>
 
       {/* ================= SWIPER ================= */}
       <Swiper
@@ -58,7 +64,7 @@ export default function PopularDestinationsSlider() {
           640: { slidesPerView: 1 },
           1024: { slidesPerView: 3 },
         }}
-        className="popular-destinations-slider mt-5"
+        className="popular-destinations-slider mt-5 "
         onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         {tours.map((tour, index) => (
@@ -66,7 +72,7 @@ export default function PopularDestinationsSlider() {
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
 
               {/* IMAGE */}
-              <div className="relative w-full h-80 overflow-hidden">
+              <div className="relative w-full h-100 overflow-hidden">
                 <Image
                   src={tour.image}
                   alt={tour.title}
@@ -116,14 +122,14 @@ export default function PopularDestinationsSlider() {
       {/* ================= MOBILE VIDEO – ZOOM ON SCROLL ================= */}
       <motion.div
         ref={videoRef}
-        style={{ 
-          width: containerWidth, 
-          x: "-50%", // THE FIX: This keeps the element centered even when it gets wider than the screen
+        style={{
+          width: containerWidth,
+          x: "-50%",
         }}
         className="
           block md:hidden
           mt-16
-          left-1/2              /* Anchor the element to the center of the screen */
+          left-1/2
           relative
           h-[750px]
           rounded-[32px]

@@ -12,7 +12,7 @@ import StatsCircles from './components/StatsCircles'
 import Explore from './components/Explore'
 import Animation from './components/Animation'
 import Newsletter from './components/Newsletter'
-import Footer from './components/Footer';
+
 import Testimonials from "./components/Testimonials";
 
 export default function HomePage() {
@@ -33,7 +33,6 @@ export default function HomePage() {
       <Animation/>
       <Explore/>
       <Newsletter/>
-      <Footer/>
     </>
   );
 }
