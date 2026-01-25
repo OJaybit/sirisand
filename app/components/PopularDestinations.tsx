@@ -118,7 +118,7 @@ export default function PopularDestinationsSlider() {
         ref={videoRef}
         style={{ 
           width: containerWidth, 
-          x: "-50%", // THE FIX: This keeps the element centered even when it gets wider than the screen
+          x: "-50%", 
         }}
         className="
           block md:hidden
