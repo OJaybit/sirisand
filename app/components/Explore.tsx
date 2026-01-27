@@ -1,66 +1,45 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import { useState, useRef } from 'react';
-import { motion, type Variants } from 'framer-motion';
-import { pacifico } from '@/app/fonts';
+import Link from "next/link";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
-/* ================= ANIMATION VARIANTS ================= */
+import { useState, useRef } from "react";
+import { motion, Variants } from "framer-motion";
+import { pacifico } from "@/app/fonts";
+import { tours } from "../data/tours";
+
+/* ---------------- MOTION VARIANTS ---------------- */
+
 const container: Variants = {
-  hidden: {},
+  hidden: { opacity: 0 },
   visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
   },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 export default function PopularDestinationsSlider() {
-  const tours = [
-    { title: '6 Day Egypt Desert & Oasis Tour', image: '/images/tours/1.jpg' },
-    { title: 'Explore Egypt From the Pyramids to the White Desert', image: '/images/tours/2.webp' },
-    { title: 'Egyptian Treasures Tour Pyramids, Temples & the Nile', image: '/images/tours/3.jpg' },
-    { title: 'Luxury Siwa Oasis & White Desert Adventure', image: '/images/tours/4.jpg' },
-    { title: 'Cairo & Alexandria Highlights Tour', image: '/images/tours/5.jpg' },
-    { title: 'Classic Nile Cruise Experience', image: '/images/tours/6.jpg' },
-    { title: 'Red Sea & Desert Safari Tour', image: '/images/tours/7.jpg' },
-    { title: 'Ancient Egypt Discovery Tour', image: '/images/tours/8.jpg' },
-    { title: 'Egypt Cultural Heritage Tour', image: '/images/tours/9.jpg' },
-    { title: 'White Desert Camping Adventure', image: '/images/tours/10.jpeg' },
-    { title: 'Grand Egypt Experience', image: '/images/tours/11.jpg' },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const swiperRef = useRef<any>(null);
 
   return (
     <section className="relative px-6 lg:px-20 py-5 -mt-30 bg-[#faf6ef]">
 
-      {/* ================= ZIGZAG BACKGROUND ================= */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path
-            d="M0,15 L8,5 L16,15 L24,5 L32,15 L40,5 L48,15 L56,5 L64,15 L72,5 L80,15 L88,5 L96,15 L100,10 L100,100 L0,100 Z"
-            fill="#faf6ef"
-          />
-        </svg>
-      </div>
-
-      {/* ================= CONTENT ================= */}
+      {/* HEADER */}
       <motion.div
-        className="relative z-10 mx-auto max-w-6xl px-4 py-25"
+        className="relative z-10 -mt-10 mx-auto max-w-6xl px-4 py-25"
         variants={container}
         initial="hidden"
         whileInView="visible"
@@ -68,12 +47,11 @@ export default function PopularDestinationsSlider() {
       >
         <motion.p
           variants={item}
-          className={`${pacifico.className} mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl -mt-5 text-[#0A7BBE]`}
+          className={`${pacifico.className} mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl text-[#0A7BBE]`}
         >
           Travel Stories & Insights
         </motion.p>
 
-        {/* ====== On mobile, stack vertically ====== */}
         <motion.div
           variants={item}
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
@@ -82,108 +60,73 @@ export default function PopularDestinationsSlider() {
             Explore More with Our Articles
           </h2>
 
-          {/* Contact button */}
-          <button
-            className="
-              relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full
-              border border-[#0A7BBE] bg-[#0A7BBE]
-              text-xs sm:text-base font-semibold
-              group
-            "
-          >
-            <span
-              className="
-                absolute inset-0 bg-[#075E94]
-                -translate-x-[100%]
-                group-hover:translate-x-0
-                transition-transform duration-500 ease-out
-              "
-            />
-            <span className="relative z-10 flex items-center gap-2 sm:gap-3">
-              See More Article
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
+          <button className="relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full border border-[#0A7BBE] bg-[#0A7BBE] text-xs sm:text-base font-semibold group">
+            <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+            <span className="relative z-10 flex items-center gap-2">
+              See More Article →
             </span>
           </button>
         </motion.div>
       </motion.div>
 
-      {/* ================= SWIPER CAROUSEL ================= */}
+      {/* SWIPER */}
       <Swiper
         modules={[Autoplay]}
         spaceBetween={32}
         slidesPerView={1}
-        loop={true}
+        loop
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
         onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          1024: { slidesPerView: 3 },
-        }}
-        className="popular-destinations-slider -mt-10"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
+        breakpoints={{ 640: { slidesPerView: 1 }, 1024: { slidesPerView: 3 } }}
+        className="-mt-15"
       >
         {tours.map((tour, index) => (
           <SwiperSlide key={index}>
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
-
-              {/* IMAGE */}
-              <div className="relative w-full h-64 sm:h-72 lg:h-80 overflow-hidden">
+              <div className="relative w-full h-80 overflow-hidden">
                 <Image
-                  src={tour.image}
+                  src={tour.heroImage}
                   alt={tour.title}
                   fill
-                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  priority
                 />
               </div>
 
-              {/* CONTENT */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-semibold text-sm sm:text-lg text-gray-600 leading-snug">
-                  {tour.title}
-                </h3>
+                <Link href={`/tours/${tour.slug}`}>
+                  <h3 className="font-semibold text-lg text-gray-600 hover:text-[#0A7BBE] transition">
+                    {tour.title}
+                  </h3>
+                </Link>
 
                 <div className="mt-auto pt-6 flex items-center justify-between">
-                  {/* EMPTY SPACE */}
-                  <span className="text-gray-600 flex items-center gap-2 invisible">
-                    ⏱
-                  </span>
+                  <span className="text-gray-600">⏱ {tour.days}</span>
+                  <Link
+                    href={`/tours/${tour.slug}`}
+                    className="px-6 py-2 rounded-full border border-[#0A7BBE] text-[#0A7BBE] hover:bg-[#0A7BBE] hover:text-white transition"
+                  >
+                    Read More →
+                  </Link>
                 </div>
               </div>
-
-              {/* Book button fully moved to the left outside card */}
-              <div className="absolute left-4 bottom-6">
-                <button className="min-h-[44px] px-5 sm:px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center text-sm sm:text-base">
-                  Read More →
-                </button>
-              </div>
-
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-
-{/* ================= DOTS ================= */}
-<div className="relative z-20 mt-6 flex justify-center gap-3">
-  {tours.slice(0, 11) .map((_, idx) => (
-    <button
-      key={idx}
-      onClick={() => swiperRef.current?.slideToLoop(idx)}
-      className={`
-        h-4 w-4 rounded-full border-2 transition-all duration-300
-        ${idx === currentIndex
-          ? 'bg-[#0a7bbe] border-[#0a7bbe]'  // Active dot: filled + border
-          : 'bg-transparent border-gray-400' // Inactive dot: border only
-        }
-      `}
-    />
-  ))}
-</div>
-
+      {/* CUSTOM DOTS */}
+      <div className="mt-8 flex justify-center gap-3">
+        {tours.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => swiperRef.current?.slideToLoop(idx)}
+            className={`h-3 w-3 rounded-full transition ${
+              idx === currentIndex ? 'bg-[#0a7bbe]' : 'border border-[#2a4b4b]'
+            }`}
+          />
+        ))}
+      </div>
     </section>
   );
 }
