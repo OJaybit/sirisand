@@ -12,7 +12,6 @@ import StatsCircles from './components/StatsCircles'
 import Explore from './components/Explore'
 import Animation from './components/Animation'
 import Newsletter from './components/Newsletter'
-
 import Testimonials from "./components/Testimonials";
 
 export default function HomePage() {

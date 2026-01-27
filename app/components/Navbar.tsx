@@ -93,7 +93,7 @@ export default function Navbar() {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="text-2xl text-black md:hidden"
+            className="text-4xl text-black md:hidden"
             onClick={() => setMobileOpen(true)}
           >
             <HiOutlineMenu />
@@ -134,7 +134,7 @@ export default function Navbar() {
           >
             {/* CLOSE BUTTON */}
             <button
-              className="absolute right-5 top-5 text-3xl text-black"
+              className="absolute right-5 top-8 text-4xl text-black"
               onClick={() => setMobileOpen(false)}
             >
               <HiOutlineX />
@@ -146,7 +146,7 @@ export default function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Siri Sand Tour Logo"
-                width={180}
+                width={190}
                 height={80}
               />
             </div>
@@ -177,7 +177,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
                     className={`text-xl font-medium transition ${
-                      link.label === "Home" ? "text-[#0A7BBE]" : "text-black"
+                      link.label === "" ? "text-[#0A7BBE]" : "text-black"
                     } hover:text-[#0A7BBE]`}
                   >
                     {link.label}

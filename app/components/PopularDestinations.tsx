@@ -37,7 +37,7 @@ export default function PopularDestinationsSlider() {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         className="Our-Tours mt-10"
       >
-        {tours.map((tour, index) => (
+        {tours.slice(0,8).map((tour, index) => (
           <SwiperSlide key={index}>
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
               {/* Image card */}
