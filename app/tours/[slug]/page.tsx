@@ -7,6 +7,9 @@ import { tours, Tour } from "../../data/tours";
 import { ArrowRightIcon } from "lucide-react";
 import ReviewTestimonial from "../../components/ReviewTestimonial";
 
+// <-- ADD THIS IMPORT
+import NewsletterSection from "../../components/Newsletter";
+
 const tabs = [
   { id: "overview", label: "Trip Overview" },
   { id: "itinerary", label: "Itinerary Details" },
@@ -55,21 +58,22 @@ export default function TourPage({
   };
 
   return (
-    <section className="w-full -ml-2 px-4 md:px-12 py-14 mt-22">
+    <section className="w-full -ml-2 px-4 md:px-12 py-14 mt-35">
 
       {/* ===== TITLE SECTION ===== */}
       <div className="mb-8 flex flex-col justify-center items-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-black">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#0A7BBE]">
           {tour.title}
         </h1>
-        <p className="text-gray-600 mt-2">{tour.description}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 items-start">
 
         {/* VIDEO LEFT */}
-        <div className="overflow-hidden rounded-[30px] h-[340px] w-[175px] lg:w-195
-          md:h-[360px] lg:h-[520px]">
+        <div
+          className="overflow-hidden rounded-[30px] h-[340px] w-[175px] lg:w-195
+          md:h-[360px] lg:h-[520px]"
+        >
           <motion.video
             src={tour.heroVideo}
             autoPlay
@@ -166,7 +170,7 @@ export default function TourPage({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35 }}
-            className=" mx-auto mt-8 bg-white text-black rounded-3xl p-6 shadow"
+            className="mx-auto mt-8 bg-white text-black rounded-3xl p-6 shadow"
           >
             {activeTab === "overview" && <p>{tour.overview}</p>}
 
@@ -202,8 +206,8 @@ export default function TourPage({
         </AnimatePresence>
       )}
 
-     {/* ACTION BUTTONS */}
-     <div className="mt-10 flex flex-col gap-4 items-center">
+      {/* ACTION BUTTONS */}
+      <div className="mt-10 flex flex-col gap-4 items-center">
         <button className="flex items-center justify-center gap-3 bg-[#0a7bbe] text-white px-14 py-5 rounded-full font-semibold hover:bg-[#075E94] transition text-lg">
           Book Now <ArrowRightIcon className="w-5 h-5" />
         </button>
@@ -217,6 +221,8 @@ export default function TourPage({
         </a>
       </div>
 
+      {/* NEWSLETTER SECTION */}
+      <NewsletterSection />
     </section>
   );
 }

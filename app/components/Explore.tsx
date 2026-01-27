@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-
 import { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { pacifico } from "@/app/fonts";
@@ -52,21 +51,24 @@ export default function PopularDestinationsSlider() {
           Travel Stories & Insights
         </motion.p>
 
-        <motion.div
-          variants={item}
-          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-        >
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
-            Explore More with Our Articles
-          </h2>
+<motion.div
+  variants={item}
+  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+>
+  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
+    Explore More with Our Articles
+  </h2>
 
-          <button className="relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full border border-[#0A7BBE] bg-[#0A7BBE] text-xs sm:text-base font-semibold group">
-            <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-            <span className="relative z-10 flex items-center gap-2">
-              See More Article →
-            </span>
-          </button>
-        </motion.div>
+  <Link href="/blogs">
+    <button className="relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full border border-[#0A7BBE] bg-[#0A7BBE] text-xs sm:text-base font-semibold group">
+      <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+      <span className="relative z-10 flex items-center gap-2">
+        See More Article →
+      </span>
+    </button>
+  </Link>
+</motion.div>
+
       </motion.div>
 
       {/* SWIPER */}

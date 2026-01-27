@@ -9,6 +9,8 @@ import {
   type Variants,
 } from 'framer-motion';
 import { pacifico } from '@/app/fonts';
+import Link from "next/link";
+
 
 /* ================= ANIMATION VARIANTS ================= */
 
@@ -113,6 +115,9 @@ export default function TripSection() {
             </motion.div>
 
             {/* ================= BUTTON ================= */}
+
+            <Link href="/contact">
+
             <motion.button
               variants={item}
               className="
@@ -135,6 +140,8 @@ export default function TripSection() {
                 </span>
               </span>
             </motion.button>
+            </Link>
+
           </motion.div>
 
           {/* ================= IMAGE SIDE ================= */}
@@ -194,9 +201,9 @@ export default function TripSection() {
         className="
           block md:hidden
           mt-16
-          left-1/2              /* Anchor to center */
+          left-1/2           
           relative
-          h-[750px]             /* Fixed height */
+          h-[750px]             
           rounded-[32px]
           overflow-hidden
           border border-gray-200

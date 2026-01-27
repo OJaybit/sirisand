@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -16,8 +17,8 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false); // main menu visibility
-  const [shadowVisible, setShadowVisible] = useState(false); // shadow visibility
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [shadowVisible, setShadowVisible] = useState(false);
   const [showNav, setShowNav] = useState(true);
 
   // Hide navbar on scroll
@@ -32,12 +33,12 @@ export default function Navbar() {
   // Open/close sequence
   useEffect(() => {
     if (mobileOpen) {
-      setShadowVisible(true); // show shadow first
-      const menuTimer = setTimeout(() => setMenuVisible(true), 300); // then menu
+      setShadowVisible(true);
+      const menuTimer = setTimeout(() => setMenuVisible(true), 300);
       return () => clearTimeout(menuTimer);
     } else {
-      setMenuVisible(false); // close menu first
-      const shadowTimer = setTimeout(() => setShadowVisible(false), 400); // then shadow
+      setMenuVisible(false);
+      const shadowTimer = setTimeout(() => setShadowVisible(false), 400);
       return () => clearTimeout(shadowTimer);
     }
   }, [mobileOpen]);
@@ -53,14 +54,15 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="fixed top-0 z-50 w-full bg-transparent"
       >
-       <div className="
-  mx-auto flex max-w-7xl items-center justify-between
-  px-6 -ml-13 lg:ml-5
-  -mt-22 pb-3 lg:-mt-27
-  md:py-4
-  lg:-mt-10
-">
-
+        <div
+          className="
+            mx-auto flex max-w-7xl items-center justify-between
+            px-6 -ml-13 lg:ml-5
+            -mt-22 pb-3 lg:-mt-27
+            md:py-4
+            lg:-mt-10
+          "
+        >
           {/* LOGO */}
           <Link href="/" className="flex items-center">
             <Image
@@ -83,7 +85,7 @@ export default function Navbar() {
 
           {/* BOOK NOW BUTTON */}
           <div className="hidden md:flex">
-            <Link href="/trip">
+            <Link href ="/ourtrip">
               <button className="relative overflow-hidden px-6 py-3 rounded-full bg-[#0A7BBE] text-white text-base font-semibold group">
                 <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <span className="relative z-10">Book Now</span>
@@ -129,7 +131,12 @@ export default function Navbar() {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ type: "spring", stiffness: 220, damping: 28, duration: 0.6 }}
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 28,
+              duration: 0.6,
+            }}
             className="fixed left-0 top-0 z-50 h-full w-[92%] bg-white shadow-2xl"
           >
             {/* CLOSE BUTTON */}
@@ -141,8 +148,7 @@ export default function Navbar() {
             </button>
 
             {/* LOGO IN MOBILE MENU */}
-            <div className="flex justify-start pl-0 -ml-5 
-            -mt-9">
+            <div className="flex justify-start pl-0 -ml-5 -mt-9">
               <Image
                 src="/logo.png"
                 alt="Siri Sand Tour Logo"
@@ -176,9 +182,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`text-xl font-medium transition ${
-                      link.label === "" ? "text-[#0A7BBE]" : "text-black"
-                    } hover:text-[#0A7BBE]`}
+                    className="text-xl font-medium text-black hover:text-[#0A7BBE]"
                   >
                     {link.label}
                   </Link>
@@ -192,14 +196,34 @@ export default function Navbar() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+/* 🔹 ONLY CHANGE IS HERE 🔹 */
+function NavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <Link
       href={href}
-      className="group relative text-lg font-semibold text-[#0a7bbe] px-3 hover:text-[#075E94]"
+      className={`
+        group relative text-lg font-semibold px-3 transition
+        ${isHome ? "text-white" : "text-[#0a7bbe]"}
+        hover:text-[#075E94]"
+      `}
     >
       {children}
-      <span className="absolute -bottom-1 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full" />
+      <span
+        className={`
+          absolute -bottom-1 left-0 h-[2px] w-0 transition-all duration-300
+          ${isHome ? "bg-white" : "bg-[#0a7bbe]"}
+          group-hover:w-full
+        `}
+      />
     </Link>
   );
 }

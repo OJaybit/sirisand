@@ -96,7 +96,7 @@ export default function TourCategories() {
 
                       <motion.div variants={item}>
                         <Link
-                          href={cat.link}
+                          href ="/ourtrip"
                           className="inline-block rounded-full border border-white px-6 py-2 text-sm font-semibold hover:bg-[#0A7BBE] hover:border-[#0A7BBE] hover:text-white transition"
                         >
                           View All
@@ -149,7 +149,7 @@ export default function TourCategories() {
                     {/* RIGHT BUTTON */}
                     <motion.div variants={item} className="mb-2">
                       <Link
-                        href={cat.link}
+                        href ="/ourtrip"
                         className="inline-flex items-center justify-center rounded-full border border-white px-8 py-3 text-sm font-semibold hover:border-[#0A7BBE] hover:bg-[#0A7BBE] transition"
                       >
                         View All

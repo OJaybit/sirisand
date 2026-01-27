@@ -6,7 +6,7 @@ import { pacifico } from '@/app/fonts';
 
 export default function AboutUs() {
   return (
-    <section className="w-full px-6 lg:px-20 py-10">
+    <section className="w-full px-6 lg:px-20 py-10 mt-20">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
 
         {/* ================= TEXT SIDE (MOBILE FIRST) ================= */}
