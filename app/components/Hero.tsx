@@ -9,16 +9,20 @@ import Link from "next/link";
 /* ---------------- SLIDES DATA ---------------- */
 const slides = [
   {
-    title: "Discover the Timeless Magic of Egyptian",
-    text: "Explore Egypt's hidden wonders",
+    title: "The sands call and the temples await; enter a story only we can tell",
+    text: "Mastering the silence of the desert and the song of the sea: Welcome to our family in the heart of nature",
   },
   {
-    title: "Discover the Timeless Magic of Egyptian",
-    text: "Journey Through Ancient Egypt",
+    title: "The sands call and the temples await; enter a story only we can tell",
+    text: "Many travel to Egypt, but few truly experience it. Join the family that owns history",
   },
   {
-    title: "Discover the Timeless Magic of Egyptian",
-    text: "Discover timeless Egyptian Beauty",
+    title: "The sands call and the temples await; enter a story only we can tell",
+    text: "Enter as a guest, leave as a member of the family, and discover that you are like a king",
+  },
+   {
+    title: "The sands call and the temples await; enter a story only we can tell",
+    text: "Welcome to our family. We invite you to explore Egypt not as a guest, but as a member of the family",
   },
 ];
 
@@ -71,7 +75,7 @@ function TextBlock({ slide }: { slide: any }) {
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: 0.3, // stagger title, text, and buttons
+            staggerChildren: 0.3, 
           },
         },
       }}
@@ -95,7 +99,7 @@ function TextBlock({ slide }: { slide: any }) {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className={`
           ${pacifico.className}
-          text-base sm:text-lg md:text-xl lg:text-2xl
+          text-base sm:text-lg md:text-xl lg:text-3xl
           text-white/90
         `}
       >
@@ -111,7 +115,7 @@ function TextBlock({ slide }: { slide: any }) {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="
           mt-3
-          text-3xl sm:text-4xl md:text-5xl lg:text-7xl
+          text-2xl sm:text-4xl md:text-5xl lg:text-4xl
           font-semibold leading-tight text-white
           max-w-full lg:max-w-[60vw]
         "
@@ -136,7 +140,7 @@ function TextBlock({ slide }: { slide: any }) {
         visible: { opacity: 1, y: 0 },
       }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className="relative overflow-hidden px-8 py-4 h-16 w-50 rounded-full bg-[#0A7BBE] text-white font-semibold group"
+      className="relative overflow-hidden px-8 py-4 h-16 w-50 rounded-full border border-white text-white font-semibold group"
     >
       <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
       <span className="relative z-10 flex items-center gap-2">

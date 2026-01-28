@@ -1,41 +1,57 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import { useState, useRef } from "react";
-import { motion, Variants } from "framer-motion";
-import { pacifico } from "@/app/fonts";
-import { tours } from "../data/tours";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
-/* ---------------- MOTION VARIANTS ---------------- */
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { pacifico } from '@/app/fonts';
+import { tours } from '../data/tours';
 
-const container: Variants = {
+/* -------------------- ANIMATION VARIANTS -------------------- */
+const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: {
+      staggerChildren: 0.15,
+    },
   },
 };
 
-const item: Variants = {
+const item = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5 },
   },
 };
 
+/* -------------------- COMPONENT -------------------- */
 export default function PopularDestinationsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const swiperRef = useRef<any>(null);
 
-  return (
-    <section className="relative px-6 lg:px-20 py-5 -mt-30 bg-[#faf6ef]">
+  const videoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: videoRef,
+    offset: ['start end', 'end start'],
+  });
 
+  const containerWidth = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['90%', '110vw']
+  );
+
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
+
+  return (
+    <section className="px-6 lg:px-20 py-2 relative -mt-25 bg-[#faf6ef]">
       {/* HEADER */}
       <motion.div
         className="relative z-10 -mt-10 mx-auto max-w-6xl px-4 py-25"
@@ -51,27 +67,26 @@ export default function PopularDestinationsSlider() {
           Travel Stories & Insights
         </motion.p>
 
-<motion.div
-  variants={item}
-  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
->
-  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
-    Explore More with Our Articles
-  </h2>
+        <motion.div
+          variants={item}
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A7BBE]">
+            Explore More with Our Articles
+          </h2>
 
-  <Link href="/blogs">
-    <button className="relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full border border-[#0A7BBE] bg-[#0A7BBE] text-xs sm:text-base font-semibold group">
-      <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-      <span className="relative z-10 flex items-center gap-2">
-        See More Article →
-      </span>
-    </button>
-  </Link>
-</motion.div>
-
+          <Link href="/blogs">
+            <button className="relative overflow-hidden w-fit px-4 py-2 sm:px-8 sm:py-4 rounded-full border border-[#0A7BBE] bg-[#0A7BBE] text-xs sm:text-base font-semibold group">
+              <span className="absolute inset-0 bg-[#075E94] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+              <span className="relative z-10 flex items-center gap-2">
+                See More Article →
+              </span>
+            </button>
+          </Link>
+        </motion.div>
       </motion.div>
 
-      {/* SWIPER */}
+      {/* SLIDER */}
       <Swiper
         modules={[Autoplay]}
         spaceBetween={32}
@@ -80,35 +95,45 @@ export default function PopularDestinationsSlider() {
         autoplay={{ delay: 3500, disableOnInteraction: false }}
         onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        breakpoints={{ 640: { slidesPerView: 1 }, 1024: { slidesPerView: 3 } }}
-        className="-mt-15"
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="Our-Tours -mt-15"
       >
-        {tours.slice(0,8).map((tour, index) => (
+        {tours.slice(0, 8).map((tour, index) => (
           <SwiperSlide key={index}>
             <div className="group bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
-              <div className="relative w-full h-80 overflow-hidden">
+              {/* IMAGE */}
+              <div className="relative w-full h-100 overflow-hidden">
                 <Image
                   src={tour.heroImage}
-                  alt={tour.title}
+                  alt={tour.cardTitle || 'Tour image'}
                   fill
+                  sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  priority
                 />
               </div>
 
+              {/* CONTENT */}
               <div className="p-6 flex flex-col flex-1">
                 <Link href={`/tours/${tour.slug}`}>
-                  <h3 className="font-semibold text-lg text-gray-600 hover:text-[#0A7BBE] transition">
-                    {tour.title}
+                  <h3 className="font-semibold text-lg text-gray-600 leading-snug hover:text-[#0A7BBE] transition-colors cursor-pointer">
+                    {tour.cardTitle}
                   </h3>
                 </Link>
 
                 <div className="mt-auto pt-6 flex items-center justify-between">
-                  <span className="text-gray-600">⏱ {tour.days}</span>
+                  <span className="text-gray-600 flex items-center gap-2">
+                    ⏱ {tour.days}
+                  </span>
+
                   <Link
                     href={`/tours/${tour.slug}`}
-                    className="px-6 py-2 rounded-full border border-[#0A7BBE] text-[#0A7BBE] hover:bg-[#0A7BBE] hover:text-white transition"
+                    className="min-h-[48px] px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center"
                   >
-                    Read More →
+                    Book Now →
                   </Link>
                 </div>
               </div>
@@ -117,18 +142,35 @@ export default function PopularDestinationsSlider() {
         ))}
       </Swiper>
 
-      {/* CUSTOM DOTS */}
-      <div className="mt-8 flex justify-center gap-3">
-        {tours.map((_, idx) => (
+      {/* DOTS */}
+      <div className="mt-10 flex justify-center gap-3">
+        {tours.slice(0, 8).map((_, idx) => (
           <button
             key={idx}
             onClick={() => swiperRef.current?.slideToLoop(idx)}
-            className={`h-3 w-3 rounded-full transition ${
+            className={`h-3 w-3 -mt-2 rounded-full transition ${
               idx === currentIndex ? 'bg-[#0a7bbe]' : 'border border-[#2a4b4b]'
             }`}
           />
         ))}
       </div>
+
+      {/* MOBILE VIDEO */}
+      <motion.div
+        ref={videoRef}
+        style={{ width: containerWidth, x: '-50%' }}
+        className="block md:hidden mt-16 left-1/2 relative h-[750px] rounded-[32px] overflow-hidden border border-gray-200 shadow-lg"
+      >
+        <motion.video
+          src="/images/tours/video2.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ scale: videoScale }}
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
     </section>
   );
 }

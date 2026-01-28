@@ -9,8 +9,9 @@ export type Testimonial = {
 };
 
 export type Tour = {
-  title: string;
-  slug: string;
+  title: string;      // Shown on the inner Tour Page
+  cardTitle?: string; // NEW: Shown on the Slider/Card. Independent of title and slug.
+  slug: string;       // The URL
   description: string;
   heroImage: string;
   heroVideo?: string;
@@ -21,8 +22,6 @@ export type Tour = {
   excluded: string[];
   reviews: string[];
   days: string;
-
-  // NEW FIELD
   testimonials: Testimonial[];
 };
 
@@ -30,14 +29,16 @@ export const makeSlug = (title: string) =>
   title.toLowerCase().replace(/ /g, '-');
 
 export const tours: Tour[] = [
-
   {
-    title: "Luxor Trip Plan",
-    slug: makeSlug("6 Day Egypt Desert  Oasis Tour"),
+    title: "Experience Luxor’s legendary heritage ", 
+    cardTitle: "Luxor Trip Plan", 
+    
+    slug: makeSlug("6 Day Egypt Desert  Oasis Tour"), 
+    
     description:
       "Experience Luxor’s legendary heritage and serene Nile vistas in comfort and style.",
     heroImage: "/images/tours/1.jpg",
-    heroVideo: "/videos/vid1.mp4",
+    heroVideo: "/videos/luxor.mp4",
     gallery: ["/images/tours/2.webp", "/images/tours/3.jpg"],
     overview:
       "Luxor is a living museum of ancient Egypt. This trip takes you through the city’s iconic temples, royal tombs, and historic sites along the Nile, offering a perfect blend of culture, history, and breathtaking landscapes.",
@@ -45,13 +46,11 @@ export const tours: Tour[] = [
       "Day Tour – Karnak, Valley of the kings, Memmon, Hatshepsut",
       "Ballon – Hot Air Ballon Ride",
       "Nile Cruise – Luxor to Aswan Boat Trip",
-      
     ],
     included: ["Hotel Pickup", "Professional Guide",],
     excluded: [""],
     reviews: ["⭐⭐⭐⭐⭐ Amazing experience!", "⭐⭐⭐⭐ Great tour and friendly guide."],
     days: "6 Days",
-
     testimonials: [
       {
         id: 1,
@@ -85,12 +84,13 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Sharm El-Sheikh Sea Trips",
+    title: "Experience world-class sea trips from Sharm El-Sheikh",
+    cardTitle: "Sharm El-Sheikh Diving",
     slug: makeSlug("Classic Nile Cruise Experience"),
     description:
       "Experience world-class sea trips from Sharm El-Sheikh, featuring iconic dive spots and stunning scenery.",
     heroImage: "/images/tours/6.jpg",
-    heroVideo: "/videos/vid2.mp4",
+    heroVideo: "/videos/sham.mp4",
     gallery: ["/images/tours/4.jpg", "/images/tours/5.jpg"],
     overview:
       "Sharm El-Sheikh sea trips offer unforgettable marine experiences, from snorkeling over coral gardens to diving in famous Red Sea sites. Enjoy scenic boat rides and explore the underwater world of Egypt’s most popular coastal destination.",
@@ -105,7 +105,6 @@ export const tours: Tour[] = [
     excluded: ["Drinks", "Tips"],
     reviews: ["⭐⭐⭐⭐⭐ Beautiful cruise!", "⭐⭐⭐⭐ Highly recommended."],
     days: "7 Days",
-
     testimonials: [
       {
         id: 1,
@@ -139,11 +138,12 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Cario",
+    title: "Discover the heart of Egypt with its pyramids, museums, and bustling streets.",
+    cardTitle: "Cairo",
     slug: makeSlug("Explore Egypt From the Pyramids to the White Desert"),
     description: "Discover the heart of Egypt with its pyramids, museums, and bustling streets.",
     heroImage: "/images/tours/2.webp",
-    heroVideo: "/videos/vid1.mp4",
+    heroVideo: "/videos/cario.mp4",
     gallery: ["/images/tours/1.jpg", "/images/tours/3.jpg"],
     overview: "A perfect blend of history and modern Egypt, this Cairo trip covers the major archaeological sites and cultural highlights, giving you a deep insight into the country’s rich past.",
     itinerary: [
@@ -157,7 +157,6 @@ export const tours: Tour[] = [
     excluded: ["Flights", "Tips"],
     reviews: ["⭐⭐⭐⭐⭐ Fantastic tour!", "⭐⭐⭐⭐ Loved it!"],
     days: "8 Days",
-
     testimonials: [
       {
         id: 1,
@@ -191,11 +190,12 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Marsa Alam Trip plan ",
+    title: "Experience a peaceful Red Sea getaway with snorkeling, diving,",
+    cardTitle: "Marsa Alam ",
     slug: makeSlug("Luxury Siwa Oasis White Desert Adventure"),
     description: "Experience a peaceful Red Sea getaway with snorkeling, diving, and coastal relaxation in Marsa Alam.",
     heroImage: "/images/tours/4.jpg",
-    heroVideo: "/videos/vid2.mp4",
+    heroVideo: "/videos/marsa.mp4",
     gallery: ["/images/tours/1.jpg", "/images/tours/2.webp"],
     overview: "Marsa Alam is ideal for those looking to escape the crowds. This plan highlights the Red Sea’s natural wonders, from colorful coral reefs to crystal-clear waters, making it perfect for eco-tourism and marine adventures.",
     itinerary: [
@@ -211,7 +211,6 @@ export const tours: Tour[] = [
     excluded: [""],
     reviews: ["⭐⭐⭐⭐⭐ Luxurious!", "⭐⭐⭐⭐ Amazing experience!"],
     days: "7 Days",
-
     testimonials: [
       {
         id: 1,
@@ -245,11 +244,12 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Fayoum Itinerary",
+    title: "Explore Fayoum’s natural beauty, ancient sites",
+    cardTitle: "Fayoum Oasis",
     slug: makeSlug("Cairo Alexandria Highlights Tour"),
     description: "Explore Fayoum’s natural beauty, ancient sites, and desert landscapes on a refreshing escape from the city.",
     heroImage: "/images/tours/5.jpg",
-    heroVideo: "/videos/vid1.mp4",
+    heroVideo: "/videos/fayoum.mp4",
     gallery: ["/images/tours/6.jpg", "/images/tours/7.jpg"],
     overview: "Fayoum is a peaceful oasis southwest of Cairo, known for its lakes, waterfalls, and protected natural areas. This itinerary includes visits to Wadi El-Rayan, Mudawara Mountain, and local villages, offering a perfect blend of nature and culture.",
     itinerary: [
@@ -260,7 +260,6 @@ export const tours: Tour[] = [
     excluded: ["Flights", "Tips"],
     reviews: ["⭐⭐⭐⭐⭐ Great tour!", "⭐⭐⭐⭐ Excellent guide."],
     days: "5 Days",
-
     testimonials: [
       {
         id: 1,
@@ -294,27 +293,27 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Siwa Oasis",
+    title: "A peaceful escape to Egypt’s remote Siwa Oasis",
+    cardTitle: " Siwa Oasis",
     slug: makeSlug("Red Sea  Desert Safari Tour"),
-  description: "A peaceful escape to Egypt’s remote Siwa Oasis, blending ancient history, salt lakes, and desert adventure.",
-heroImage: "/images/tours/7.jpg",
-heroVideo: "/videos/vid2.mp4",
-gallery: [
-  "/images/tours/8.jpg",
-  "/images/tours/9.jpg"
-],
-overview: "Discover the magic of Siwa Oasis as you explore ancient ruins, relax in natural salt lakes, and experience thrilling desert safaris in Egypt’s western desert.",
-itinerary: [
-  "Day 1 – Shali Fortress & Mountain of the Dead",
-  "Day 2 – Salt Lakes & Cleopatra’s Bath",
-  "Day 3 – Great Sand Sea Desert Safari",
-  "Extra – Extended Safari Experience", 
+    description: "A peaceful escape to Egypt’s remote Siwa Oasis, blending ancient history, salt lakes, and desert adventure.",
+    heroImage: "/images/tours/7.jpg",
+    heroVideo: "/videos/siwa.mp4",
+    gallery: [
+      "/images/tours/8.jpg",
+      "/images/tours/9.jpg"
+    ],
+    overview: "Discover the magic of Siwa Oasis as you explore ancient ruins, relax in natural salt lakes, and experience thrilling desert safaris in Egypt’s western desert.",
+    itinerary: [
+      "Day 1 – Shali Fortress & Mountain of the Dead",
+      "Day 2 – Salt Lakes & Cleopatra’s Bath",
+      "Day 3 – Great Sand Sea Desert Safari",
+      "Extra – Extended Safari Experience", 
     ],
     included: ["Hotel", "Guide", "Meals", "Transport"],
     excluded: ["Flights", "Tips"],
     reviews: ["⭐⭐⭐⭐ Amazing tour!", "⭐⭐⭐⭐⭐ Loved it!"],
     days: "6 Days",
-
     testimonials: [
       {
         id: 1,
@@ -348,11 +347,12 @@ itinerary: [
   },
 
   {
-    title: "Aswan Itinerary",
+    title: "Explore Aswan’s serene Nile scenery & ancient",
+    cardTitle: "Aswan Cultural Tour",
     slug: makeSlug("Ancient Egypt Discovery Tour"),
     description: "Explore Aswan’s serene Nile scenery, ancient temples, and Nubian culture.",
     heroImage: "/images/tours/8.jpg",
-    heroVideo: "/videos/vid1.mp4",
+    heroVideo: "/videos/aswan.mp4",
     gallery: ["/images/tours/1.jpg", "/images/tours/2.webp"],
     overview: "Aswan is known for its peaceful Nile setting and rich Nubian heritage. This itinerary includes visits to iconic sites such as Philae Temple, the High Dam, and traditional Nubian villages, offering a perfect mix of history and relaxation.",
     itinerary: [
@@ -364,7 +364,6 @@ itinerary: [
     excluded: ["Flights", "Tips"],
     reviews: ["⭐⭐⭐⭐⭐ Excellent!", "⭐⭐⭐⭐ Fun trip!"],
     days: "9 Days",
-
     testimonials: [
       {
         id: 1,
@@ -398,11 +397,12 @@ itinerary: [
   },
 
   {
-    title: "Hurghada",
+    title: "Learn about Egypt’s traditions, monuments, and culture.",
+    cardTitle: "Hurghada",
     slug: makeSlug("Egypt Cultural Heritage Tour"),
     description: "Immerse yourself in Egypt’s history and culture.",
     heroImage: "/images/tours/9.jpg",
-    heroVideo: "/videos/vid2.mp4",
+    heroVideo: "/videos/hurghada.mp4",
     gallery: ["/images/tours/10.jpeg", "/images/tours/11.jpg"],
     overview:
       "Learn about Egypt’s traditions, monuments, and culture.",
@@ -417,7 +417,6 @@ itinerary: [
     excluded: ["Flights", "Tips"],
     reviews: ["⭐⭐⭐⭐ Great cultural experience!", "⭐⭐⭐⭐⭐ Loved it!"],
     days: "10 Days",
-
     testimonials: [
       {
         id: 1,

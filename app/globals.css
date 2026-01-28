@@ -64,7 +64,7 @@
 }
 
 /* Smooth bounce */
-@keyframes whatsapp-bounce {
+@keyframes sapp-bounce {
   0%, 100% {
     transform: translateY(0);
   }

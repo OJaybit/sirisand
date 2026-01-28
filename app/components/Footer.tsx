@@ -11,7 +11,9 @@ import {
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaYoutube,
 } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -27,30 +29,35 @@ export default function Footer() {
               width={180}
               height={60}
             />
-            
           </div>
 
           <p className="text-gray-600 leading-relaxed -mt-20 mb-6">
-           From golden deserts to vibrant cultural landmarks, we bring you the authentic experiences that make Egypt truly unforgettable.
+            From golden deserts to vibrant cultural landmarks, we bring you the authentic experiences that make Egypt truly unforgettable.
           </p>
 
           {/* Social Icons */}
           <div className="flex gap-3">
-            {[FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp, FaInstagram].map(
-              (Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full
+            {[
+              { Icon: FaFacebookF, href: "https://www.facebook.com/share/1GSg2bFn1Z/" },
+              { Icon: FaYoutube, href: "https://youtube.com/@sirisandtours?si=sGpI_SpxQ8JeD2Rq" },
+              { Icon: FaTiktok, href: "https://www.tiktok.com/@siri.sand.tours?_r=1&_t=ZS-93QFhoDBpmm" },
+              { Icon: FaWhatsapp, href: "https://wa.me/234XXXXXXXXXX" },
+              { Icon: FaInstagram, href: "https://www.instagram.com/sirisandtours?igsh=emltNHVlejE4ZnBl" },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full
                   bg-[#EEF7FB] text-[#0A7BBE]
                   hover:bg-[#0A7BBE] hover:text-white transition"
-                >
-                  <Icon size={16} />
-                </a>
-              )
-            )}
+              >
+                <item.Icon size={16} />
+              </a>
+            ))}
           </div>
-        </div>
+        </div> {/* <-- THIS WAS MISSING */}
 
         {/* Quick Links */}
         <div>
@@ -60,8 +67,8 @@ export default function Footer() {
           <ul className="space-y-4 text-gray-600">
             {[
               { name: "Home", href: "/" },
-              { name: "Our Trips", href: "/trips" },
-              { name: "Blog", href: "/blog" },
+              { name: "Our Trips", href: "/ourtrip" },
+              { name: "Blog", href: "/blogs" },
               { name: "About Us", href: "/about" },
               { name: "Contact Us", href: "/contact" },
             ].map((link) => (
@@ -89,7 +96,7 @@ export default function Footer() {
               <span className="w-11 h-11 rounded-full bg-[#EEF7FB] flex items-center justify-center text-[#0A7BBE]">
                 <FaPhoneAlt />
               </span>
-              +201206911696
+              +201288062555
             </li>
 
             <li className="flex items-center gap-4">
@@ -103,8 +110,7 @@ export default function Footer() {
               <span className="w-11 h-11 rounded-full bg-[#EEF7FB] flex items-center justify-center text-[#0A7BBE]">
                 <FaMapMarkerAlt />
               </span>
-              {/* El Bawiti, Bahariya Oasis, */}
-               Giza, Egypt
+              Giza, Egypt
             </li>
           </ul>
         </div>

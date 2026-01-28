@@ -1,5 +1,5 @@
 "use client";
-
+import { pacifico } from '@/app/fonts';
 import { HiOutlineLocationMarker, HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
 
 export default function ContactSection() {
@@ -8,7 +8,7 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-12">
-          <p className="text-3xl font-medium text-[#0a7bbe]">Get In Touch</p>
+          <p className={`${pacifico.className} text-4xl text-[#0A7BBE]`}>Get In Touch</p>
           <h2 className="text-5xl font-bold text-[#0a7bbe] mt-2">
             Our Contact Information
           </h2>
@@ -43,7 +43,7 @@ export default function ContactSection() {
                 Phone Number
               </h3>
               <p className="mt-2 text-lg text-gray-700">
-                +2012
+                +201288062555
               </p>
             </div>
           </div>

@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { tours, Tour } from "../../data/tours";
 import { ArrowRightIcon } from "lucide-react";
 import ReviewTestimonial from "../../components/ReviewTestimonial";
-
-// <-- ADD THIS IMPORT
 import NewsletterSection from "../../components/Newsletter";
 
 const tabs = [
@@ -45,13 +43,18 @@ export default function TourPage({
   const [activeTab, setActiveTab] = useState<string | null>("overview");
   const isMobile = useMediaQuery("(max-width: 768px)");
 
+  // ✅ FORCE FIRST TAB TO OPEN ON LOAD
+  useEffect(() => {
+    setActiveTab("overview");
+  }, []);
+
   if (!tour) {
     return <div className="p-20 text-center text-2xl">Tour Not Found</div>;
   }
 
   const handleTabClick = (id: string) => {
     if (activeTab === id) {
-      setActiveTab(null); // collapse behavior
+      setActiveTab(null);
     } else {
       setActiveTab(id);
     }
@@ -61,39 +64,44 @@ export default function TourPage({
     <section className="w-full -ml-2 px-4 md:px-12 py-14 mt-35">
 
       {/* ===== TITLE SECTION ===== */}
-      <div className="mb-8 flex flex-col justify-center items-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#0A7BBE]">
-          {tour.title}
-        </h1>
-      </div>
+     {/* ===== TITLE SECTION ===== */}
+<div className="w-full mb-10 flex justify-center items-center">
+  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0A7BBE] break-words text-center">
+    {tour.title}
+  </h1>
+</div>
 
-      <div className="grid grid-cols-2 gap-4 items-start">
 
-        {/* VIDEO LEFT */}
-        <div
-          className="overflow-hidden rounded-[30px] h-[340px] w-[175px] lg:w-195
-          md:h-[360px] lg:h-[520px]"
-        >
-          <motion.video
-            src={tour.heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        </div>
 
-        {/* IMAGES RIGHT */}
-        <div className="flex flex-col w-[180px] lg:w-100 pl-1 lg:ml-52 gap-2">
-          {tour.gallery.slice(0, 2).map((img, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-[30px] relative h-[165px] md:h-[180px] lg:h-[250px]"
-            >
-              <Image src={img} alt="" fill className="object-cover" />
-            </div>
-          ))}
+      <div className="overflow-x-hidden">
+        <div className="grid grid-cols-2 gap-5 w-screen items-start">
+
+          {/* VIDEO LEFT */}
+          <div
+            className="overflow-hidden rounded-[30px] h-[340px] w-full lg:w-195
+            md:h-[360px] lg:h-[520px]"
+          >
+            <motion.video
+              src={tour.heroVideo || undefined}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* IMAGES RIGHT */}
+          <div className="flex flex-col w-full lg:w-100 -ml-2  lg:ml-35 md:w-80 gap-2 pr-8 lg:pr-10">
+            {tour.gallery.slice(0, 2).map((img, i) => (
+              <div
+                key={i}
+                className="overflow-hidden rounded-[30px] relative w-full h-[165px] md:h-[180px] lg:h-[250px]"
+              >
+                <Image src={img} alt="" fill className="object-cover" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -115,7 +123,7 @@ export default function TourPage({
                 {tab.label}
               </button>
 
-              {/* MOBILE: show content directly under opened tab */}
+              {/* MOBILE CONTENT */}
               {isMobile && activeTab === tab.id && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -150,7 +158,6 @@ export default function TourPage({
                     </ul>
                   )}
 
-                  {/* ONLY SHOW REVIEW TESTIMONIALS WHEN REVIEWS TAB IS OPEN */}
                   {tab.id === "reviews" && (
                     <ReviewTestimonial testimonials={tour.testimonials} />
                   )}
@@ -173,7 +180,6 @@ export default function TourPage({
             className="mx-auto mt-8 bg-white text-black rounded-3xl p-6 shadow"
           >
             {activeTab === "overview" && <p>{tour.overview}</p>}
-
             {activeTab === "itinerary" && (
               <ul className="list-disc ml-5 space-y-2">
                 {tour.itinerary.map((item, i) => (
@@ -181,7 +187,6 @@ export default function TourPage({
                 ))}
               </ul>
             )}
-
             {activeTab === "included" && (
               <ul className="list-disc ml-5 space-y-2">
                 {tour.included.map((item, i) => (
@@ -189,7 +194,6 @@ export default function TourPage({
                 ))}
               </ul>
             )}
-
             {activeTab === "excluded" && (
               <ul className="list-disc ml-5 space-y-2">
                 {tour.excluded.map((item, i) => (
@@ -197,8 +201,6 @@ export default function TourPage({
                 ))}
               </ul>
             )}
-
-            {/* ONLY SHOW REVIEW TESTIMONIALS WHEN REVIEWS TAB IS OPEN */}
             {activeTab === "reviews" && (
               <ReviewTestimonial testimonials={tour.testimonials} />
             )}
@@ -213,7 +215,7 @@ export default function TourPage({
         </button>
 
         <a
-          href="https://wa.me/234XXXXXXXXXX"
+          href="https://wa.me/+201288062555"
           target="_blank"
           className="flex items-center justify-center gap-3 bg-green-500 text-white px-14 py-5 rounded-full font-semibold hover:bg-green-600 transition text-lg"
         >
@@ -221,7 +223,6 @@ export default function TourPage({
         </a>
       </div>
 
-      {/* NEWSLETTER SECTION */}
       <NewsletterSection />
     </section>
   );
