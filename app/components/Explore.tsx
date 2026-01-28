@@ -133,7 +133,7 @@ export default function PopularDestinationsSlider() {
                     href={`/tours/${tour.slug}`}
                     className="min-h-[48px] px-6 rounded-full border border-[#0A7BBE] text-[#0A7BBE] font-medium hover:bg-[#0A7BBE] hover:text-white transition-colors flex items-center"
                   >
-                    Book Now →
+                    Read more →
                   </Link>
                 </div>
               </div>

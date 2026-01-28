@@ -190,7 +190,7 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Experience a peaceful Red Sea getaway with snorkeling, diving,",
+    title: "Experience a peaceful Red Sea getaway with snorkeling & diving,",
     cardTitle: "Marsa Alam ",
     slug: makeSlug("Luxury Siwa Oasis White Desert Adventure"),
     description: "Experience a peaceful Red Sea getaway with snorkeling, diving, and coastal relaxation in Marsa Alam.",
@@ -244,7 +244,7 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Explore Fayoum’s natural beauty, ancient sites",
+    title: "Explore Fayoum’s natural beauty & ancient sites",
     cardTitle: "Fayoum Oasis",
     slug: makeSlug("Cairo Alexandria Highlights Tour"),
     description: "Explore Fayoum’s natural beauty, ancient sites, and desert landscapes on a refreshing escape from the city.",
@@ -347,7 +347,7 @@ export const tours: Tour[] = [
   },
 
   {
-    title: "Explore Aswan’s serene Nile scenery & ancient",
+    title: "Explore Aswan’s serene Nile scenery & ancient temples",
     cardTitle: "Aswan Cultural Tour",
     slug: makeSlug("Ancient Egypt Discovery Tour"),
     description: "Explore Aswan’s serene Nile scenery, ancient temples, and Nubian culture.",
@@ -358,7 +358,7 @@ export const tours: Tour[] = [
     itinerary: [
       "Day 1 – High Dam, Philae, Kalabsha, Nubian Village & Museum",
       "Day 2 – Abu Simbel(full Day) & Komo Ombo",
-      "Cruise – VNile Cruise: Aswan-luxor",
+      "Cruise – Nile Cruise: Aswan-luxor",
     ],
     included: ["Hotel", "Guide", "Meals", "Transport"],
     excluded: ["Flights", "Tips"],

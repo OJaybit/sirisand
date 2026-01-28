@@ -65,7 +65,7 @@ export default function TourPage({
 
       {/* ===== TITLE SECTION ===== */}
      {/* ===== TITLE SECTION ===== */}
-<div className="w-full mb-10 flex justify-center items-center">
+<div className="w-full mb-10 flex justify-center -mt-10 items-center">
   <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0A7BBE] break-words text-center">
     {tour.title}
   </h1>
