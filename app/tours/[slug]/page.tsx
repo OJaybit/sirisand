@@ -209,19 +209,26 @@ export default function TourPage({
       )}
 
       {/* ACTION BUTTONS */}
-      <div className="mt-10 flex flex-col gap-4 items-center">
-        <button className="flex items-center justify-center gap-3 bg-[#0a7bbe] text-white px-14 py-5 rounded-full font-semibold hover:bg-[#075E94] transition text-lg">
-          Book Now <ArrowRightIcon className="w-5 h-5" />
-        </button>
+     <div className="mt-10 flex flex-col gap-4 items-center">
+  {/* Book Now button linking to new page */}
+  <a
+    href="/booknow"
+    className="flex items-center justify-center gap-3 bg-[#0A7BBE] text-white px-14 py-5 rounded-full font-semibold hover:bg-[#075E94] transition text-lg"
+  >
+    Book Now <ArrowRightIcon className="w-5 h-5" />
+  </a>
 
-        <a
-          href="https://wa.me/+201288062555"
-          target="_blank"
-          className="flex items-center justify-center gap-3 bg-green-500 text-white px-14 py-5 rounded-full font-semibold hover:bg-green-600 transition text-lg"
-        >
-          WhatsApp <ArrowRightIcon className="w-5 h-5" />
-        </a>
-      </div>
+  {/* WhatsApp button */}
+  <a
+    href="https://wa.me/+201288062555"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center justify-center gap-3 bg-green-500 text-white px-14 py-5 rounded-full font-semibold hover:bg-green-600 transition text-lg"
+  >
+    WhatsApp <ArrowRightIcon className="w-5 h-5" />
+  </a>
+</div>
+
 
       <NewsletterSection />
     </section>

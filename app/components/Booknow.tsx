@@ -11,20 +11,21 @@ export default function BookingForm() {
   const [email, setEmail] = useState("");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
-  const [adults, setAdults] = useState<number | "">("");
-  const [children, setChildren] = useState<number | "">("");
+  const [adults, setAdults] = useState<number>(1);
+  const [children, setChildren] = useState<number>(0);
   const [comment, setComment] = useState("");
 
   const [errors, setErrors] = useState({
     checkIn: false,
     checkOut: false,
+    dateOrder: false, // new error state for invalid date order
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Reset errors
-    setErrors({ checkIn: false, checkOut: false });
+    setErrors({ checkIn: false, checkOut: false, dateOrder: false });
 
     // Validate dates
     let hasError = false;
@@ -34,6 +35,10 @@ export default function BookingForm() {
     }
     if (!checkOut) {
       setErrors((prev) => ({ ...prev, checkOut: true }));
+      hasError = true;
+    }
+    if (checkIn && checkOut && checkOut < checkIn) {
+      setErrors((prev) => ({ ...prev, dateOrder: true }));
       hasError = true;
     }
 
@@ -128,18 +133,16 @@ export default function BookingForm() {
           </label>
           <DatePicker
             selected={checkIn}
-            onChange={(date) => setCheckIn(date)}
+            onChange={(date: Date | null) => setCheckIn(date)}
             dateFormat="dd - MM - yyyy"
             placeholderText="DD - MM - YYYY"
             className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 ${
-              errors.checkIn
+              errors.checkIn || errors.dateOrder
                 ? "border-red-500 focus:ring-red-500"
                 : "border-gray-200 focus:ring-[#0A7BBE]"
             }`}
           />
-          {errors.checkIn && (
-            <p className="text-red-500 text-sm mt-1">Check-in date is required</p>
-          )}
+          {errors.checkIn && <p className="text-red-500 text-sm mt-1">Check-in date is required</p>}
         </div>
 
         {/* Check-out Date */}
@@ -149,18 +152,18 @@ export default function BookingForm() {
           </label>
           <DatePicker
             selected={checkOut}
-            onChange={(date) => setCheckOut(date)}
+            onChange={(date: Date | null) => setCheckOut(date)}
             dateFormat="dd - MM - yyyy"
             placeholderText="DD - MM - YYYY"
+            minDate={checkIn || new Date()} // Prevent check-out before check-in
             className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 ${
-              errors.checkOut
+              errors.checkOut || errors.dateOrder
                 ? "border-red-500 focus:ring-red-500"
                 : "border-gray-200 focus:ring-[#0A7BBE]"
             }`}
           />
-          {errors.checkOut && (
-            <p className="text-red-500 text-sm mt-1">Check-out date is required</p>
-          )}
+          {errors.checkOut && <p className="text-red-500 text-sm mt-1">Check-out date is required</p>}
+          {errors.dateOrder && <p className="text-red-500 text-sm mt-1">Check-out cannot be before Check-in</p>}
         </div>
 
         {/* Number of Adults */}
