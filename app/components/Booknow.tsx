@@ -60,12 +60,12 @@ export default function BookingForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
+    <div className="max-w-4xl mt-30 mx-auto p-6 bg-white rounded-2xl shadow-lg">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0A7BBE]">
         Start your adventure – book today
       </h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 text-black">
         {/* First Name */}
         <div>
           <label className="block font-semibold mb-1">
@@ -76,7 +76,7 @@ export default function BookingForm() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="Enter your first name here"
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0A7BBE]"
+            className="w-full px-4 py-3 rounded-lg border text-gray-200 border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0A7BBE]"
             required
           />
         </div>
