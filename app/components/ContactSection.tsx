@@ -58,7 +58,7 @@ export default function ContactSection() {
                 Email
               </h3>
               <p className="mt-2 text-lg text-gray-700">
-                tours@siri <br /> sandtours.com
+               sirisand tours <br /> @gmail.com
               </p>
             </div>
           </div>
