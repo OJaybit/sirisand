@@ -20,44 +20,54 @@ export default function BookingForm() {
     checkOut: false,
     dateOrder: false, // new error state for invalid date order
   });
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Reset errors
+  setErrors({ checkIn: false, checkOut: false, dateOrder: false });
 
-    // Reset errors
-    setErrors({ checkIn: false, checkOut: false, dateOrder: false });
+  let hasError = false;
 
-    // Validate dates
-    let hasError = false;
-    if (!checkIn) {
-      setErrors((prev) => ({ ...prev, checkIn: true }));
-      hasError = true;
-    }
-    if (!checkOut) {
-      setErrors((prev) => ({ ...prev, checkOut: true }));
-      hasError = true;
-    }
-    if (checkIn && checkOut && checkOut < checkIn) {
-      setErrors((prev) => ({ ...prev, dateOrder: true }));
-      hasError = true;
-    }
+  if (!checkIn) {
+    setErrors((prev) => ({ ...prev, checkIn: true }));
+    hasError = true;
+  }
+  if (!checkOut) {
+    setErrors((prev) => ({ ...prev, checkOut: true }));
+    hasError = true;
+  }
+  if (checkIn && checkOut && checkOut < checkIn) {
+    setErrors((prev) => ({ ...prev, dateOrder: true }));
+    hasError = true;
+  }
 
-    if (hasError) return;
+  if (hasError) return;
 
-    // Form submission
-    console.log({
-      firstName,
-      lastName,
-      mobile,
-      email,
-      checkIn,
-      checkOut,
-      adults,
-      children,
-      comment,
-    });
-    alert("Form submitted!");
-  };
+  const subject = "New Booking Request – Siris & Tours";
+
+  const body = `
+First Name: ${firstName}
+Last Name: ${lastName}
+Mobile Number: ${mobile}
+Email Address: ${email}
+
+Check-in Date: ${checkIn?.toDateString()}
+Check-out Date: ${checkOut?.toDateString()}
+
+Number of Adults: ${adults}
+Number of Children: ${children}
+
+Comment:
+${comment}
+`;
+
+  const mailtoLink = `mailto:sirisandtours@gmail.com?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailtoLink;
+};
+
 
   return (
     <div className="max-w-4xl mt-30 mx-auto p-6 bg-white rounded-2xl shadow-lg">
