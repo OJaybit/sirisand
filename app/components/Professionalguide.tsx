@@ -4,8 +4,6 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import {
   motion,
-  useScroll,
-  useTransform,
   type Variants,
 } from 'framer-motion';
 import { pacifico } from '@/app/fonts';
@@ -33,19 +31,8 @@ const item: Variants = {
 };
 
 export default function TripSection() {
-  /* ================= SCROLL ZOOM VIDEO ================= */
-  const videoRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: videoRef,
-    offset: ['start end', 'end start'],
-  });
 
-  // 1. Container Width: Expands from 90% to 110vw (Wider than screen)
-  const containerWidth = useTransform(scrollYProgress, [0, 1], ['90%', '110vw']);
-
-  // 2. Internal Video Scale: Parallax zoom effect
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
 
   return (
     <>
@@ -191,35 +178,31 @@ export default function TripSection() {
         </div>
       </section>
 
-      {/* ================= MOBILE VIDEO (ZOOM ON SCROLL) ================= */}
-      <motion.div
-        ref={videoRef}
-        style={{ 
-          width: containerWidth, 
-          x: "-50%", // Keeps the element centered even when wider than screen
-        }}
-        className="
-          block md:hidden
-          mt-16
-          left-1/2           
-          relative
-          h-[750px]             
-          rounded-[32px]
-          overflow-hidden
-          border border-gray-200
-          shadow-lg
-        "
-      >
-        <motion.video
-          src="/images/tours/video1.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ scale: videoScale }} // Internal zoom
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
+      
+        {/* ================= MOBILE VIDEO (FIXED – NO SCROLL ZOOM) ================= */}
+<div
+  className="
+    block md:hidden
+    mt-16
+    mx-auto
+    h-[750px]
+    max-w-[90%]
+    rounded-[32px]
+    overflow-hidden
+    border border-gray-200
+    shadow-lg
+  "
+>
+  <video
+    src="/images/tours/video1.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="w-full h-full object-cover"
+  />
+</div>
+
 
     </>
   );

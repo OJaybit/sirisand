@@ -8,7 +8,7 @@ const primaryColor = "#0A7BBE";
 const blogPosts = [
   {
     id: 1,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 19, 2025",
     category: "Uncategorized",
     title: "Why You Should Experience a Personalised Safari Tour in Egypt",
@@ -18,7 +18,7 @@ const blogPosts = [
   },
   {
     id: 2,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 19, 2025",
     category: "Crystal Mountain",
     title: "Exploring the Magic of Siwa Oasis and White Desert Tour",
@@ -28,7 +28,7 @@ const blogPosts = [
   },
   {
     id: 3,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 19, 2025",
     category: "White Desert",
     title: "Why the White Desert Safari Egypt Should Be on Your Bucket List",
@@ -38,7 +38,7 @@ const blogPosts = [
   },
   {
     id: 4,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 19, 2025",
     category: "Black Desert",
     title: "Exploring the Wonders of the Black Desert and Crystal Mountain in Egypt",
@@ -48,7 +48,7 @@ const blogPosts = [
   },
   {
     id: 5,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 20, 2025",
     category: "Bahariya Oasis",
     title: "Bahariya Oasis: Natural Springs, History, and Desert Serenity",
@@ -58,7 +58,7 @@ const blogPosts = [
   },
   {
     id: 6,
-    email: "tours@sirisandtour.com",
+    email: "sirisandtours@gmail.com",
     date: "June 20, 2025",
     category: "Desert Camping",
     title: "Desert Camping in Egypt: A Night Under a Million Stars",

@@ -103,7 +103,7 @@ export default function Footer() {
               <span className="w-11 h-11 rounded-full bg-[#EEF7FB] flex items-center justify-center text-[#0A7BBE]">
                 <FaEnvelope />
               </span>
-              tours@sirisandtour.com
+              sirisandtours@gmail.com
             </li>
 
             <li className="flex items-center gap-4">

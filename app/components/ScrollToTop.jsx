@@ -9,38 +9,29 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
 
       const scrollPercent = (scrollTop / docHeight) * 100;
-
       setProgress(scrollPercent);
-      setShow(scrollTop > 200);
+      setShow(scrollTop > 100);  // show after scrolling 100px
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // run once to set initial state
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <button
-      onClick={scrollToTop}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       className={`scroll-progress ${show ? "show" : ""}`}
       style={{
-        background: `conic-gradient(
-          #0a7bbe ${progress}%,
-          #e6e6e6 ${progress}%
-        )`,
+        background: `conic-gradient(#0a7bbe ${progress}%, #e6e6e6 ${progress}%)`,
       }}
     >
       <span className="scroll-icon">

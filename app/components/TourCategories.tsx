@@ -7,10 +7,74 @@ import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 
 const categories = [
-  { title: 'Cairo', listings: 3, image: '/images/categories/desert-safari.webp', link: '/tours/desert' },
-  { title: 'Hurghada', listings: 4, image: '/images/categories/historical.webp', link: '/tours/historical' },
-  { title: 'Luxor', listings: 2, image: '/images/categories/holiday.webp', link: '/tours/holiday' },
+  {
+    title: 'Cairo',
+    listings: 3,
+    image: '/images/categories/desert-safari.webp',
+    link: '/tours/cairo',
+  },
+  {
+    title: 'Hurghada',
+    listings: 4,
+    image: '/images/categories/historical.webp',
+    link: '/tours/hurghada',
+  },
+  {
+    title: 'Luxor',
+    listings: 2,
+    image: '/images/trending/luxor-tombs.webp',
+    link: '/tours/luxor',
+  },
+  {
+    title: 'Aswan',
+    listings: 5,
+    image: '/images/trending/whale-valley.webp',
+    link: '/tours/aswan',
+  },
+  {
+    title: 'Marsa Alam',
+    listings: 3,
+    image: '/images/trending/marsa-alam.webp',
+    link: '/tours/marsa-alam',
+  },
+  {
+    title: 'Sharm El Sheikh',
+    listings: 6,
+    image: '/images/trending/gem.webp',
+    link: '/tours/sharm',
+  },
+  {
+    title: 'Siwa',
+    listings: 2,
+    image: '/images/trending/siwa-salt.webp',
+    link: '/tours/siwa',
+  },
+  {
+    title: 'Al Fayom',
+    listings: 4,
+    image: '/images/trending/white-desert.webp',
+    link: '/tours/fayom',
+  },
+  {
+    title: 'Alexandria',
+    listings: 3,
+    image: '/images/trending/sinai.webp',
+    link: '/tours/alexandria',
+  },
+  {
+    title: 'Dahab',
+    listings: 2,
+    image: '/images/trending/khan.webp',
+    link: '/tours/dahab',
+  },
+  {
+    title: 'Giza',
+    listings: 5,
+    image: '/images/trending/philae.webp',
+    link: '/tours/giza',
+  },
 ];
+
 
 /* ================= ANIMATION VARIANTS ================= */
 const container: Variants = {
@@ -112,7 +176,8 @@ export default function TourCategories() {
       </div>
 
       {/* DESKTOP HORIZONTAL ACCORDION */}
-      <div className="hidden md:flex mx-auto max-w-[1300px] gap-6 px-6">
+     <div className="hidden md:flex overflow-x-auto mx-auto max-w-[1300px] gap-6 px-6">
+
         {categories.map((cat, index) => {
           const isActive = active === index;
           return (

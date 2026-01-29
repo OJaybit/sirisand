@@ -4,6 +4,9 @@
   --background: #ffffff;
   --foreground:#ffffff;
 }
+
+/* ================= SHINE EFFECT ================= */
+
 .shine-wrapper {
   position: absolute;
   inset: 0;
@@ -22,8 +25,8 @@
   top: -40%;
   left: 0;
   width: 100%;
-  height: 25%; /* THICK LINE */
-  background: rgba(220, 220, 220, 0.95); /* white-gray solid */
+  height: 25%;
+  background: rgba(220, 220, 220, 0.95);
   animation: none;
 }
 
@@ -32,74 +35,79 @@
 }
 
 @keyframes shine {
-  0% {
-    transform: translateY(-100%);
-  }
-  50% {
-    transform: translateY(30%);
-  }
-  100% {
-    transform: translateY(120%);
-  }
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(30%); }
+  100% { transform: translateY(120%); }
 }
+
+/* ================= WHATSAPP BUTTON ================= */
 
 .whatsapp-float {
   position: fixed;
+  inset: auto;
   bottom: 24px;
   left: 24px;
+
   width: 60px;
   height: 60px;
   background: #25d366;
   color: #fff;
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
   z-index: 9999;
+
+  will-change: transform;
+  backface-visibility: hidden;
 
   animation:
     whatsapp-bounce 2.5s ease-in-out infinite,
     whatsapp-glow 1.8s infinite;
 }
 
-/* Smooth bounce */
-@keyframes sapp-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+/* Bounce uses translateY ONLY */
+@keyframes whatsapp-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-
-
-/* Soft glowing pulse */
 @keyframes whatsapp-glow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
+/* ================= PAGE BASE ================= */
 
+html {
+  height: 100%;
+}
 
+body {
+  min-height: 100%;
+  position: relative;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-/* Scroll Progress Button */
+/* ================= SCROLL TO TOP ================= */
+
 .scroll-progress {
   position: fixed;
+  inset: auto;
   bottom: 24px;
   right: 24px;
+
   width: 56px;
   height: 56px;
   border-radius: 50%;
   background: conic-gradient(#0a7bbe 0%, #e6e6e6 0%);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,17 +115,17 @@
 
   opacity: 0;
   pointer-events: none;
+
   z-index: 9999;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+
+  transition: opacity 0.3s ease;
 }
 
 .scroll-progress.show {
   opacity: 1;
   pointer-events: auto;
-}
-
-.scroll-progress:hover {
-  transform: translateY(-4px);
 }
 
 /* Inner circle */
@@ -132,8 +140,8 @@
   color: #0a7bbe;
 }
 
+/* ================= TESTIMONIALS ================= */
 
-/* Testimonials */
 .testimonials-section {
   padding: 80px 0;
   background: #fff;
@@ -155,14 +163,11 @@
   color: #0f3e4a;
 }
 
-/* Slider wrapper */
 .testimonials-slider {
   position: relative;
   padding: 0 60px;
 }
 
-
-/* Navigation buttons */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -180,55 +185,27 @@
   justify-content: center;
 }
 
-.nav-btn.prev {
-  left: 0;
-}
-
-.nav-btn.next {
-  right: 0;
-}
+.nav-btn.prev { left: 0; }
+.nav-btn.next { right: 0; }
 
 .nav-btn:hover {
   background: #0a7bbe;
   color: #fff;
 }
 
-/* Mobile spacing */
 @media (max-width: 768px) {
-  .testimonials-slider {
-    padding: 0 20px;
-  }
-
-  .nav-btn {
-    display: none;
-  }
+  .testimonials-slider { padding: 0 20px; }
+  .nav-btn { display: none; }
 }
 
+/* ================= VIDEO ================= */
 
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
- video {
+video {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+
+/* ================= SWIPER ================= */
 
 .popular-destinations-slider .swiper-pagination {
   bottom: 0;
